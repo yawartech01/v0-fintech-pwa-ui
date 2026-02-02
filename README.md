@@ -1,30 +1,183 @@
-# Fintech PWA UI
+# VELTOX - USDT to INR Exchange PWA
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A production-ready Progressive Web App for USDT to INR exchange, built with React, TypeScript, and Vite.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/painaxel01-3820s-projects/v0-fintech-pwa-ui)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/qFpzG2EC0xd)
+## 🚀 Quick Start
 
-## Overview
+```bash
+# Install dependencies
+pnpm install
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+# Start development server
+pnpm run dev
 
-## Deployment
+# Open http://localhost:3000
+```
 
-Your project is live at:
+**Demo Login:** Use any email/password to login (mock authentication)
 
-**[https://vercel.com/painaxel01-3820s-projects/v0-fintech-pwa-ui](https://vercel.com/painaxel01-3820s-projects/v0-fintech-pwa-ui)**
+## ✨ Features
 
-## Build your app
+- 🎨 **Premium Dark Theme** - Muted green/sage color scheme
+- 📱 **Mobile-First Design** - Optimized for mobile with safe area support
+- ⚡ **PWA Support** - Offline capability, installable, app-like experience
+- 🔒 **Type-Safe** - Strict TypeScript with full type coverage
+- 💾 **Local Storage Persistence** - All data persists across sessions
+- ✅ **Tested** - E2E tests with Playwright
+- 🚀 **CI/CD Ready** - GitHub Actions workflow with quality checks
+- 📊 **Lighthouse CI** - Automated performance monitoring
 
-Continue building your app on:
+## Pages
 
-**[https://v0.app/chat/qFpzG2EC0xd](https://v0.app/chat/qFpzG2EC0xd)**
+- **Home** - USDT rate display, quick actions, recent activity
+- **Sell Ads** - Create, manage, pause/resume sell advertisements
+- **Wallet** - Deposit/withdraw USDT, transaction history
+- **Profile** - User settings and navigation
+- **Referral** - Invite friends and earn rewards
+- **Bank Accounts** - Manage payment methods
+- **Security** - 2FA and security settings
+- **Support** - FAQ and contact options
 
-## How It Works
+## Tech Stack
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+- **Framework**: React 18 with React Router
+- **Build Tool**: Vite 5
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS 3
+- **UI Components**: Radix UI primitives
+- **PWA**: vite-plugin-pwa with Workbox
+- **Testing**: Playwright
+- **Linting**: ESLint + Prettier
+- **Monitoring**: Sentry (optional, env-guarded)
+
+## Development
+
+### Prerequisites
+
+- Node.js 20+
+- pnpm 8+
+
+### Setup
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start dev server
+pnpm run dev
+
+# Open http://localhost:3000
+```
+
+### Scripts
+
+```bash
+# Development
+pnpm run dev              # Start dev server
+pnpm run build            # Build for production
+pnpm run preview          # Preview production build
+
+# Quality checks
+pnpm run lint             # Run ESLint
+pnpm run lint:fix         # Fix ESLint errors
+pnpm run format           # Format code with Prettier
+pnpm run format:check     # Check code formatting
+pnpm run typecheck        # TypeScript type checking
+
+# Testing
+pnpm run test             # Run Playwright tests
+pnpm run test:ui          # Run tests in UI mode
+
+# All checks (CI)
+pnpm run check            # format-check + lint + typecheck + test + build
+pnpm run fix              # format + lint:fix
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── ui/              # Reusable UI components
+│   ├── auth/            # Authentication pages
+│   ├── pages/           # Main app pages
+│   ├── AppShell.tsx     # Layout with header + bottom tabs
+├── lib/
+│   ├── data-store.ts    # Mock data layer with localStorage
+│   └── utils.ts         # Utility functions
+├── types/
+│   └── index.ts         # TypeScript type definitions
+├── App.tsx              # Main app with routing
+├── main.tsx             # Entry point
+└── index.css            # Global styles + theme
+```
+
+## Data Layer
+
+The app uses a mock data store (`src/lib/data-store.ts`) that:
+- Persists all state to localStorage
+- Provides type-safe CRUD operations
+- Simulates API behavior for demo purposes
+- Includes: wallet, sell ads, bank accounts, referrals
+
+Replace with real API calls in production.
+
+## PWA Configuration
+
+The app is configured as a PWA with:
+- App shell precaching
+- Runtime image caching
+- Offline fallback page
+- Installable with app icons
+- Mobile-optimized manifest
+
+Service worker is auto-generated by vite-plugin-pwa.
+
+## Mobile UX
+
+- Uses `100dvh` for proper mobile viewport height
+- Safe area insets for notched devices
+- Minimum 44px tap targets
+- Fixed header and bottom navigation
+- Scrollable content region only
+
+## Monitoring (Optional)
+
+Sentry integration is included but guarded by environment variable:
+
+```bash
+# .env.local
+VITE_SENTRY_DSN=your_dsn_here
+```
+
+Only initializes in production when DSN is set.
+
+## CI/CD
+
+GitHub Actions workflow runs on every push/PR:
+1. Format check
+2. Lint
+3. Type check
+4. Build
+5. Playwright E2E tests
+6. Lighthouse CI (performance audits)
+
+Commented workflow section for Sentry releases with sourcemaps.
+
+## Environment Variables
+
+See `.env.example` for configuration options.
+
+All environment variables are optional - app works without them.
+
+## License
+
+Proprietary - VELTOX Platform
+
+## Notes
+
+- KYC features have been removed as requested
+- Referral system fully implemented
+- Brand name is "VELTOX" throughout
+- Theme is muted green premium dark
+- All data is mock/demo - integrate real backend for production
