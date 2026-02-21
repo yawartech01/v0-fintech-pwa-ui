@@ -92,7 +92,9 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+    outline-color: color-mix(in oklch, var(--ring), transparent 50%);
+    -webkit-tap-highlight-color: color-mix(in oklch, var(--primary), transparent 70%);
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
@@ -112,6 +114,12 @@
   button:not(.btn-sm),
   a:not(.link-sm) {
     @apply min-h-11 min-w-11;
+  }
+
+  /* Tap highlight for interactive cards */
+  [role="button"],
+  .cursor-pointer {
+    -webkit-tap-highlight-color: color-mix(in oklch, var(--primary), transparent 70%);
   }
 }
 

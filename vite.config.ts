@@ -40,6 +40,8 @@ export default defineConfig({
         ]
       },
       workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
         // Precache app shell
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         // Runtime caching for images
@@ -51,7 +53,7 @@ export default defineConfig({
               cacheName: 'images-cache',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
+                maxAgeSeconds: 30 * 24 * 60 * 60
               }
             }
           }
@@ -70,6 +72,11 @@ export default defineConfig({
     }
   },
   server: {
+    host: '0.0.0.0',
+    port: 3000
+  },
+  preview: {
+    host: '0.0.0.0',
     port: 3000
   }
 })

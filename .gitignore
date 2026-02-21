@@ -5,6 +5,7 @@ pnpm-lock.yaml
 # Build outputs
 dist
 dist-ssr
+dev-dist
 *.local
 
 # Environment
@@ -12,6 +13,13 @@ dist-ssr
 .env.local
 .env.production.local
 .env.development.local
+
+# Backend (server-only, contains secrets - never push)
+backend/.env
+backend/node_modules
+backend/dist
+backend/uploads
+backend/logs
 
 # Editor
 .vscode/*
@@ -38,3 +46,31 @@ pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+
+# Implementation notes (server-side docs, not needed in repo)
+ADMIN-PANEL-FEATURES.md
+ADMIN-PANEL-GUIDE.md
+ADMIN-PANEL-PRODUCTION-STATUS.md
+ADMIN-PRODUCTION-STATUS.md
+APPROVAL-WITHDRAWAL-IMPLEMENTATION.md
+FULL-INTEGRATION-COMPLETE.md
+HOME-IMPLEMENTATION.md
+HOME-SUMMARY.md
+INTEGRATION-CHECKLIST.md
+INTEGRATION-COMPLETE.md
+INTEGRATION-GUIDE.md
+INTEGRATION-NEXT-STEPS.md
+INTEGRATION-STATUS.md
+INTEGRATION-SUMMARY.txt
+ONBOARDING-IMPLEMENTATION.md
+PROFILE-COMPLETE-IMPLEMENTATION.md
+PROFILE-IMPLEMENTATION-SUMMARY.md
+PROJECT-COMPLETE.md
+QUICK-REFERENCE.md
+README-START-HERE.md
+SELL-ADS-IMPLEMENTATION.md
+SETUP-INSTRUCTIONS.md
+SHIP-READY-AUDIT.md
+SHIP-READY-SUMMARY.md
+TRC20-DEPOSIT-IMPLEMENTATION.md
+setup-api-mode.sh

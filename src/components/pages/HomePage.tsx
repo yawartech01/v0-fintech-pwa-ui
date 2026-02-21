@@ -1,98 +1,148 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { Plus, TrendingUp, Clock, Store, X } from 'lucide-react'
+import { useEffect, useState, useCallback } from 'react'
+import {
+  Plus,
+  TrendingUp,
+  Clock,
+  ArrowDownCircle,
+  ArrowUpCircle,
+  RefreshCw,
+  X,
+  Info,
+} from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { APIService } from '@/services/api-service'
+import { useRealAPI } from '@/config/api-mode'
 import { dataStore } from '@/lib/data-store'
-import { formatCurrency, formatNumber, formatRelativeTime } from '@/lib/utils'
-import type { USDTRate, Transaction } from '@/types'
+import { RateService } from '@/lib/rate-service'
+import { ActivityService, type ActivityEvent } from '@/lib/activity-service'
+import { connectWebSocket } from '@/lib/api-client'
+import type { USDTRate } from '@/types'
 
 export function HomePage() {
   const navigate = useNavigate()
+  const useAPI = useRealAPI()
   const [rate, setRate] = useState<USDTRate | null>(null)
-  const [balance, setBalance] = useState(0)
-  const [recentActivity, setRecentActivity] = useState<Transaction[]>([])
-  const [showBanner, setShowBanner] = useState(true)
+  const [availableUsdt, setAvailableUsdt] = useState(0)
+  const [lockedUsdt, setLockedUsdt] = useState(0)
+  const [recentActivity, setRecentActivity] = useState<ActivityEvent[]>([])
+  const [loading, setLoading] = useState(true)
+  const [showBanner, setShowBanner] = useState(false)
+  const [bannerMessage, setBannerMessage] = useState('')
+
+  const loadData = useCallback(async () => {
+    setLoading(true)
+    try {
+      if (useAPI) {
+        const [walletData, settingsData] = await Promise.all([
+          APIService.getWallet(),
+          APIService.getPublicSettings(),
+        ])
+
+        const w = walletData?.wallet || walletData
+        setAvailableUsdt(parseFloat(w?.available_usdt || '0'))
+        setLockedUsdt(parseFloat(w?.locked_usdt || '0'))
+
+        const usdtRate = parseFloat(settingsData?.usdtInrRate || '0')
+        if (usdtRate > 0) {
+          setRate({
+            rate: usdtRate,
+            change24h: 0,
+            lastUpdated: new Date(),
+          })
+        }
+
+        const banner = settingsData?.adminBanner || settingsData?.bannerMessage || ''
+        if (banner) {
+          setBannerMessage(banner)
+          setShowBanner(true)
+        }
+      } else {
+        const authState = dataStore.getAuthState()
+        if (authState.user) {
+          setRate(RateService.getCurrentRate())
+          const balances = dataStore.getBalances(authState.user.id)
+          setAvailableUsdt(balances.available)
+          setLockedUsdt(balances.locked)
+          const activity = ActivityService.getRecentActivity(authState.user.id, 10)
+          setRecentActivity(activity)
+        }
+      }
+    } catch {
+      // silently fail — page still renders with defaults
+    } finally {
+      setLoading(false)
+    }
+  }, [useAPI])
 
   useEffect(() => {
-    setRate(dataStore.getUSDTRate())
-    const wallet = dataStore.getWallet()
-    setBalance(wallet.balance)
-    setRecentActivity(wallet.transactions.slice(0, 5))
-  }, [])
+    loadData()
+  }, [loadData])
 
-  const getActivityIcon = (type: string) => {
-    switch (type) {
-      case 'deposit':
-        return '↓'
-      case 'withdraw':
-        return '↑'
-      case 'sell_ad_locked':
-        return '🔒'
-      case 'sell_ad_released':
-        return '🔓'
-      case 'referral_reward':
-        return '🎁'
-      default:
-        return '•'
-    }
-  }
+  // Real-time Socket.IO sync for rate, banner, and wallet updates
+  useEffect(() => {
+    if (!useAPI) return
+    const userId = localStorage.getItem('user_id') || ''
+    if (!userId) return
 
-  const getActivityLabel = (type: string) => {
-    switch (type) {
-      case 'deposit':
-        return 'Deposit'
-      case 'withdraw':
-        return 'Withdraw'
-      case 'sell_ad_locked':
-        return 'Funds Locked'
-      case 'sell_ad_released':
-        return 'Funds Released'
-      case 'referral_reward':
-        return 'Referral Reward'
-      default:
-        return 'Transaction'
-    }
-  }
+    const socket = connectWebSocket(userId)
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return 'default'
-      case 'pending':
-        return 'secondary'
-      case 'processing':
-        return 'outline'
-      case 'failed':
-        return 'destructive'
-      default:
-        return 'secondary'
+    const onRateUpdated = (data: { rate: number }) => {
+      if (data?.rate > 0) {
+        setRate({ rate: data.rate, change24h: 0, lastUpdated: new Date() })
+      }
     }
+
+    const onBannerUpdated = (data: { message: string }) => {
+      const msg = data?.message || ''
+      setBannerMessage(msg)
+      setShowBanner(!!msg)
+    }
+
+    const onWalletUpdated = () => {
+      APIService.getWallet().then((walletData) => {
+        const w = walletData?.wallet || walletData
+        setAvailableUsdt(parseFloat(w?.available_usdt || '0'))
+        setLockedUsdt(parseFloat(w?.locked_usdt || '0'))
+      }).catch(() => {})
+    }
+
+    socket.on('rate_updated', onRateUpdated)
+    socket.on('banner_updated', onBannerUpdated)
+    socket.on('wallet_updated', onWalletUpdated)
+
+    return () => {
+      socket.off('rate_updated', onRateUpdated)
+      socket.off('banner_updated', onBannerUpdated)
+      socket.off('wallet_updated', onWalletUpdated)
+    }
+  }, [useAPI])
+
+  const totalBalance = availableUsdt + lockedUsdt
+
+  const formatNumber = (num: number) => {
+    return num.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
   }
 
   return (
     <div className="space-y-4 pb-4">
-      {/* Platform Update Banner */}
-      {showBanner && (
-        <Card className="bg-blue-500/10 border-blue-500/20">
-          <CardContent className="p-4">
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex items-start gap-3">
-                <div className="mt-0.5 text-blue-400">
-                  <TrendingUp className="w-4 h-4" />
-                </div>
-                <div className="space-y-1 flex-1">
-                  <p className="text-sm font-medium text-blue-100">High demand today</p>
-                  <p className="text-xs text-blue-200/80">
-                    Orders may take 2-3 hours longer than usual
-                  </p>
-                  <p className="text-xs text-blue-300/60 mt-1">10 mins ago</p>
-                </div>
+      {/* Platform Banner */}
+      {showBanner && bannerMessage && (
+        <Card className="bg-secondary/50 border-border/60">
+          <CardContent className="px-3 py-2.5">
+            <div className="flex items-start gap-2.5">
+              <Info className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
+              <div className="flex-1 min-w-0 space-y-1">
+                <p className="text-sm text-foreground leading-snug">{bannerMessage}</p>
               </div>
               <button
                 onClick={() => setShowBanner(false)}
-                className="text-blue-300 hover:text-blue-100 min-h-0 min-w-0"
+                className="p-1 text-muted-foreground hover:text-foreground transition-colors flex-shrink-0 -mr-1 -mt-0.5"
                 aria-label="Dismiss"
               >
                 <X className="w-4 h-4" />
@@ -103,31 +153,28 @@ export function HomePage() {
       )}
 
       {/* USDT Rate Card */}
-      <Card className="bg-gradient-to-br from-primary/20 to-primary/5 border-primary/20">
-        <CardContent className="p-6">
-          <div className="space-y-2">
-            <h2 className="text-sm font-medium text-muted-foreground">Today's USDT Rate</h2>
+      <Card className="bg-gradient-to-br from-primary/20 to-primary/5 border-primary/20 overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent" />
+        <CardContent className="p-6 relative z-10">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-medium text-muted-foreground">Today's USDT Rate</h2>
+              {rate && (
+                <p className="text-xs text-muted-foreground">
+                  {RateService.getLastUpdatedText(rate.lastUpdated)}
+                </p>
+              )}
+            </div>
             <div className="flex items-end justify-between">
               <div>
                 <div className="text-3xl font-bold text-foreground">
-                  {rate ? formatCurrency(rate.rate) : '—'}
+                  {rate ? `₹${formatNumber(rate.rate)}` : '—'}
                 </div>
-                <div className="flex items-center gap-2 mt-1">
-                  <Badge
-                    variant={rate && rate.change24h >= 0 ? 'default' : 'destructive'}
-                    className="text-xs"
-                  >
-                    {rate && rate.change24h >= 0 ? '+' : ''}
-                    {rate ? rate.change24h.toFixed(2) : '0'}%
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">vs 24h</span>
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="text-xs text-muted-foreground">per USDT (fixed by company)</span>
                 </div>
               </div>
-              <TrendingUp
-                className={`w-8 h-8 ${
-                  rate && rate.change24h >= 0 ? 'text-primary' : 'text-destructive'
-                }`}
-              />
+              <TrendingUp className="w-8 h-8 text-primary" />
             </div>
           </div>
         </CardContent>
@@ -137,93 +184,143 @@ export function HomePage() {
       <Card>
         <CardContent className="p-6">
           <div className="space-y-3">
-            <h2 className="text-sm font-medium text-muted-foreground">Available Balance</h2>
-            <div className="text-3xl font-bold">{formatNumber(balance)} USDT</div>
-            <div className="flex gap-2">
-              <Button
-                onClick={() => navigate('/wallet')}
-                variant="default"
-                size="sm"
-                className="flex-1"
-              >
-                Deposit
-              </Button>
-              <Button
-                onClick={() => navigate('/wallet')}
-                variant="outline"
-                size="sm"
-                className="flex-1"
-              >
-                Withdraw
-              </Button>
+            <span className="text-xs text-muted-foreground uppercase tracking-wide">
+              Total Balance
+            </span>
+            <div className="flex items-end gap-1.5">
+              <span className="text-4xl font-bold leading-none text-foreground">
+                {formatNumber(totalBalance)}
+              </span>
+              <span className="text-lg text-muted-foreground mb-0.5">USDT</span>
             </div>
+            {(availableUsdt > 0 || lockedUsdt > 0) && (
+              <div className="flex gap-4 text-xs text-muted-foreground">
+                <span>Available: {formatNumber(availableUsdt)}</span>
+                {lockedUsdt > 0 && <span>Locked: {formatNumber(lockedUsdt)}</span>}
+              </div>
+            )}
+            <Button
+              onClick={() => navigate('/wallet')}
+              variant="outline"
+              size="sm"
+              className="w-full mt-2"
+            >
+              View Wallet
+            </Button>
           </div>
         </CardContent>
       </Card>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-2 gap-3">
-        <Card
-          className="cursor-pointer hover:bg-secondary/50 transition-colors"
-          onClick={() => navigate('/sell-ads/create')}
-        >
-          <CardContent className="p-6 text-center">
-            <Plus className="w-8 h-8 mx-auto mb-2 text-primary" />
-            <p className="text-sm font-medium">Create Sell Ad</p>
-          </CardContent>
-        </Card>
-        <Card
-          className="cursor-pointer hover:bg-secondary/50 transition-colors"
-          onClick={() => navigate('/sell-ads')}
-        >
-          <CardContent className="p-6 text-center">
-            <Store className="w-8 h-8 mx-auto mb-2 text-primary" />
-            <p className="text-sm font-medium">View My Ads</p>
-          </CardContent>
-        </Card>
+      <div>
+        <h2 className="text-base font-semibold mb-3">Quick Actions</h2>
+        <div className="grid grid-cols-3 gap-3">
+          <Card
+            className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all"
+            onClick={() => navigate('/sell-ads/create')}
+          >
+            <CardContent className="p-4 text-center">
+              <Plus className="w-6 h-6 mx-auto mb-2 text-foreground" />
+              <p className="text-xs font-medium text-foreground">Create Ad</p>
+            </CardContent>
+          </Card>
+          <Card
+            className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all"
+            onClick={() => navigate('/wallet?tab=deposit')}
+          >
+            <CardContent className="p-4 text-center">
+              <ArrowDownCircle className="w-6 h-6 mx-auto mb-2 text-foreground" />
+              <p className="text-xs font-medium text-foreground">Deposit</p>
+            </CardContent>
+          </Card>
+          <Card
+            className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all"
+            onClick={() => navigate('/wallet?tab=withdraw')}
+          >
+            <CardContent className="p-4 text-center">
+              <ArrowUpCircle className="w-6 h-6 mx-auto mb-2 text-foreground" />
+              <p className="text-xs font-medium text-foreground">Withdraw</p>
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
-      {/* Recent Activity */}
-      <div className="space-y-3">
-        <h2 className="text-base font-semibold">Recent Activity</h2>
-        {recentActivity.length === 0 ? (
+      {/* Recent Activity Feed */}
+      <div>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-base font-semibold">Recent Activity</h2>
+          <Button onClick={loadData} variant="ghost" size="sm" className="h-8 text-xs">
+            <RefreshCw className={`w-3 h-3 mr-1 ${loading ? 'animate-spin' : ''}`} />
+            Refresh
+          </Button>
+        </div>
+
+        {loading ? (
           <Card>
             <CardContent className="p-8 text-center">
-              <Clock className="w-12 h-12 mx-auto mb-3 text-muted-foreground" />
-              <p className="text-sm text-muted-foreground">No recent activity</p>
+              <RefreshCw className="w-8 h-8 mx-auto mb-2 text-muted-foreground animate-spin" />
+              <p className="text-sm text-muted-foreground">Loading...</p>
+            </CardContent>
+          </Card>
+        ) : recentActivity.length === 0 ? (
+          <Card className="bg-secondary/30">
+            <CardContent className="p-8 text-center space-y-4">
+              <Clock className="w-12 h-12 mx-auto text-muted-foreground" />
+              <div className="space-y-2">
+                <p className="text-sm font-medium">No Activity Yet</p>
+                <p className="text-xs text-muted-foreground">
+                  Start by depositing USDT or creating your first sell ad
+                </p>
+              </div>
             </CardContent>
           </Card>
         ) : (
           <Card>
             <CardContent className="p-0">
-              {recentActivity.map((activity, index) => (
+              {recentActivity.map((event, index) => (
                 <div
-                  key={activity.id}
-                  className={`p-4 flex items-center justify-between ${
+                  key={event.id}
+                  className={`p-4 flex items-center justify-between hover:bg-secondary/30 transition-colors ${
                     index !== recentActivity.length - 1 ? 'border-b border-border/60' : ''
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-lg">
-                      {getActivityIcon(activity.type)}
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-lg flex-shrink-0">
+                      {event.icon}
                     </div>
-                    <div>
-                      <p className="text-sm font-medium">{getActivityLabel(activity.type)}</p>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium truncate">{event.label}</p>
                       <p className="text-xs text-muted-foreground">
-                        {formatRelativeTime(activity.timestamp)}
+                        {ActivityService.formatRelativeTime(event.timestamp)}
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm font-semibold">{formatNumber(activity.amount)} USDT</p>
-                    <Badge variant={getStatusColor(activity.status)} className="text-xs mt-1">
-                      {activity.status}
+                  <div className="text-right flex-shrink-0 ml-2">
+                    <p className="text-sm font-semibold">{formatNumber(event.amount)}</p>
+                    <Badge
+                      variant={ActivityService.getStatusVariant(event.status)}
+                      className="text-xs mt-1"
+                    >
+                      {event.status}
                     </Badge>
                   </div>
                 </div>
               ))}
             </CardContent>
           </Card>
+        )}
+
+        {recentActivity.length > 0 && (
+          <div className="text-center pt-3">
+            <Button
+              onClick={() => navigate('/wallet')}
+              variant="ghost"
+              size="sm"
+              className="text-xs"
+            >
+              View All Transactions
+            </Button>
+          </div>
         )}
       </div>
     </div>
