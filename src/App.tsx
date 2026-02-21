@@ -72,9 +72,6 @@ function App() {
     const authState = dataStore.getAuthState()
     const jwtToken = localStorage.getItem('auth_token')
     const authenticated = authState.isAuthenticated || !!jwtToken
-    // #region agent log
-    fetch('http://localhost:7585/ingest/21d26861-f749-47b4-a8b9-9a94fd0fa5f3',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'9bcb79'},body:JSON.stringify({sessionId:'9bcb79',location:'App.tsx:authCheck',message:'Auth state on mount',data:{datastoreAuth:authState.isAuthenticated,hasJwt:!!jwtToken,authenticated},timestamp:Date.now(),hypothesisId:'H-AUTH'})}).catch(()=>{});
-    // #endregion
     setIsAuthenticated(authenticated)
   }, [])
 
