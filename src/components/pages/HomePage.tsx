@@ -9,6 +9,8 @@ import {
   RefreshCw,
   X,
   Info,
+  Wallet,
+  ChevronRight,
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -153,57 +155,60 @@ export function HomePage() {
       )}
 
       {/* USDT Rate Card */}
-      <Card className="bg-gradient-to-br from-primary/20 to-primary/5 border-primary/20 overflow-hidden relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent" />
+      <Card className="glow-card border-primary/25 overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/[0.03] to-transparent pointer-events-none" />
+        <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-primary/[0.06] blur-2xl pointer-events-none" />
         <CardContent className="p-4 relative z-10">
-          <div className="flex items-center justify-between mb-1">
-            <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Today's USDT Rate</h2>
+          <div className="flex items-center justify-between mb-1.5">
+            <h2 className="text-[11px] font-semibold text-primary/80 uppercase tracking-widest">Live Rate</h2>
             {rate && (
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-[10px] text-muted-foreground/70">
                 {RateService.getLastUpdatedText(rate.lastUpdated)}
               </p>
             )}
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-2xl font-bold text-foreground leading-tight">
+              <div className="text-[1.75rem] font-bold text-foreground leading-none tracking-tight">
                 {rate ? `₹${formatNumber(rate.rate)}` : '—'}
               </div>
-              <span className="text-[11px] text-muted-foreground mt-0.5 block">per USDT (fixed by company)</span>
+              <span className="text-[11px] text-muted-foreground/70 mt-1 block">per USDT</span>
             </div>
-            <TrendingUp className="w-6 h-6 text-primary" />
+            <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
+              <TrendingUp className="w-4 h-4 text-primary" />
+            </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Balance Card - Compact */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">USDT Balance</p>
-            <Button
-              onClick={() => navigate('/wallet')}
-              variant="ghost"
-              size="sm"
-              className="text-xs text-primary -mr-2"
-            >
-              View Wallet
-            </Button>
+      {/* Balance Row - Minimal */}
+      <div
+        className="flex items-center justify-between px-4 py-2.5 cursor-pointer active:bg-secondary/30 transition-colors"
+        onClick={() => navigate('/wallet')}
+      >
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
+            <Wallet className="w-3.5 h-3.5 text-muted-foreground" />
           </div>
-          <p className="text-2xl font-bold tracking-tight">
-            {formatNumber(totalBalance)}
-            <span className="text-sm font-medium text-muted-foreground ml-1.5">USDT</span>
-          </p>
+          <div className="min-w-0">
+            <p className="text-[11px] text-muted-foreground leading-tight">Balance</p>
+            <p className="text-sm font-semibold leading-tight">
+              {formatNumber(totalBalance)} <span className="text-[11px] font-normal text-muted-foreground">USDT</span>
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
           {(availableUsdt > 0 || lockedUsdt > 0) && (
-            <div className="flex gap-4 mt-2 text-xs text-muted-foreground">
-              <span>Available: <span className="font-semibold text-foreground">{formatNumber(availableUsdt)}</span></span>
+            <div className="text-right">
+              <p className="text-[10px] text-muted-foreground/60 leading-tight">{formatNumber(availableUsdt)} avail</p>
               {lockedUsdt > 0 && (
-                <span>Locked: <span className="font-semibold text-foreground">{formatNumber(lockedUsdt)}</span></span>
+                <p className="text-[10px] text-muted-foreground/60 leading-tight">{formatNumber(lockedUsdt)} locked</p>
               )}
             </div>
           )}
-        </CardContent>
-      </Card>
+          <ChevronRight className="w-4 h-4 text-muted-foreground/40 flex-shrink-0" />
+        </div>
+      </div>
 
       {/* Quick Actions */}
       <div className="px-4">
