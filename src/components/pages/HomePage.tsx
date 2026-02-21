@@ -182,31 +182,33 @@ export function HomePage() {
 
       {/* Balance Card */}
       <Card>
-        <CardContent className="p-6">
-          <div className="space-y-3">
-            <span className="text-xs text-muted-foreground uppercase tracking-wide">
-              Total Balance
-            </span>
-            <div className="flex items-end gap-1.5">
-              <span className="text-4xl font-bold leading-none text-foreground">
-                {formatNumber(totalBalance)}
-              </span>
-              <span className="text-lg text-muted-foreground mb-0.5">USDT</span>
-            </div>
-            {(availableUsdt > 0 || lockedUsdt > 0) && (
-              <div className="flex gap-4 text-xs text-muted-foreground">
-                <span>Available: {formatNumber(availableUsdt)}</span>
-                {lockedUsdt > 0 && <span>Locked: {formatNumber(lockedUsdt)}</span>}
+        <CardContent className="p-5">
+          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">USDT Balance</p>
+          <p className="text-4xl font-bold tracking-tight">
+            {formatNumber(totalBalance)}
+            <span className="text-lg font-medium text-muted-foreground ml-2">USDT</span>
+          </p>
+          {(availableUsdt > 0 || lockedUsdt > 0) && (
+            <div className="border-t border-border/50 mt-4 pt-4 flex">
+              <div className="flex-1">
+                <p className="text-xs text-muted-foreground mb-0.5">Available</p>
+                <p className="text-base font-bold">{formatNumber(availableUsdt)} <span className="text-xs font-medium text-muted-foreground">USDT</span></p>
               </div>
-            )}
-            <Button
-              onClick={() => navigate('/wallet')}
-              variant="outline"
-              className="w-full mt-2"
-            >
-              View Wallet
-            </Button>
-          </div>
+              {lockedUsdt > 0 && (
+                <div className="flex-1">
+                  <p className="text-xs text-muted-foreground mb-0.5">Locked in Ads</p>
+                  <p className="text-base font-bold">{formatNumber(lockedUsdt)} <span className="text-xs font-medium text-muted-foreground">USDT</span></p>
+                </div>
+              )}
+            </div>
+          )}
+          <Button
+            onClick={() => navigate('/wallet')}
+            variant="outline"
+            className="w-full mt-4"
+          >
+            View Wallet
+          </Button>
         </CardContent>
       </Card>
 
