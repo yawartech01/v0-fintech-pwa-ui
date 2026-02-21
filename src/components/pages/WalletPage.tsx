@@ -408,30 +408,26 @@ export function WalletPage() {
       {/* Overview Tab */}
       {activeTab === 'overview' && (
         <div className="space-y-4">
-          {/* Balance Cards */}
-          <div className="grid grid-cols-3 gap-2">
-            <Card>
-              <CardContent className="p-4">
-                <p className="text-xs text-muted-foreground mb-1">Available</p>
-                <p className="text-lg font-bold">{formatNumber(balances.available)}</p>
-                <p className="text-xs text-muted-foreground">USDT</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <p className="text-xs text-muted-foreground mb-1">Locked</p>
-                <p className="text-lg font-bold">{formatNumber(balances.locked)}</p>
-                <p className="text-xs text-muted-foreground">USDT</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <p className="text-xs text-muted-foreground mb-1">Total</p>
-                <p className="text-lg font-bold">{formatNumber(balances.total)}</p>
-                <p className="text-xs text-muted-foreground">USDT</p>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Balance Card */}
+          <Card>
+            <CardContent className="p-5">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">USDT Balance</p>
+              <p className="text-4xl font-bold tracking-tight">
+                {formatNumber(balances.total)}
+                <span className="text-lg font-medium text-muted-foreground ml-2">USDT</span>
+              </p>
+              <div className="border-t border-border/50 mt-4 pt-4 flex">
+                <div className="flex-1">
+                  <p className="text-xs text-muted-foreground mb-0.5">Available</p>
+                  <p className="text-base font-bold">{formatNumber(balances.available)} <span className="text-xs font-medium text-muted-foreground">USDT</span></p>
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-muted-foreground mb-0.5">Locked in Ads</p>
+                  <p className="text-base font-bold">{formatNumber(balances.locked)} <span className="text-xs font-medium text-muted-foreground">USDT</span></p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Quick Actions */}
           <div className="grid grid-cols-2 gap-3">
