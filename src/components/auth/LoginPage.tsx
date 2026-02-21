@@ -61,17 +61,17 @@ export function LoginPage({ onAuthChange }: LoginPageProps) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-dvh bg-background px-4">
-      <div className="w-full max-w-md space-y-8">
+    <div className="flex flex-col items-center justify-center min-h-dvh bg-background px-6">
+      <div className="w-full max-w-sm space-y-8">
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold">Welcome back</h1>
-          <p className="text-muted-foreground">Login to your VELTOX account</p>
+          <h1 className="text-3xl font-bold tracking-tight">Welcome back</h1>
+          <p className="text-muted-foreground text-[15px]">Login to your VELTOX account</p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-5">
           {/* Email Input */}
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-sm font-medium">Email</Label>
             <Input
               id="email"
               type="email"
@@ -84,21 +84,21 @@ export function LoginPage({ onAuthChange }: LoginPageProps) {
 
           {/* Password Input */}
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-sm font-medium">Password</Label>
             <div className="relative">
               <Input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
-                placeholder="••••••••"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="pr-10"
+                className="pr-12"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground transition-colors rounded"
                 tabIndex={-1}
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -106,12 +106,12 @@ export function LoginPage({ onAuthChange }: LoginPageProps) {
             </div>
           </div>
 
-          <Button type="submit" className="w-full h-12" disabled={loading}>
+          <Button type="submit" className="w-full text-base" size="lg" disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </Button>
         </form>
 
-        <div className="text-center space-y-2">
+        <div className="text-center space-y-1">
           <button
             onClick={() => navigate('/forgot-password')}
             className="block w-full py-3 text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -121,7 +121,7 @@ export function LoginPage({ onAuthChange }: LoginPageProps) {
           
           <button
             onClick={() => navigate('/signup')}
-            className="block w-full py-3 text-sm text-primary hover:underline"
+            className="block w-full py-3 text-sm text-primary hover:underline font-medium"
           >
             {"Don't have an account? Sign up"}
           </button>

@@ -138,15 +138,15 @@ export function SecurityPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="p-4 bg-secondary/30 rounded-lg space-y-2">
+          <div className="p-4 bg-secondary/40 rounded-lg space-y-2.5 border border-border/40">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-medium">Current Session</p>
+              <p className="text-sm font-semibold">Current Session</p>
               <Badge variant="default" className="text-xs">
                 Active
               </Badge>
             </div>
-            <div className="space-y-1 text-xs text-muted-foreground">
-              <p>Device ID: {deviceId.slice(0, 20)}...</p>
+            <div className="space-y-1.5 text-xs text-muted-foreground">
+              <p className="font-mono">Device: {deviceId.slice(0, 20)}...</p>
               <p>Last Active: {lastActive}</p>
             </div>
           </div>

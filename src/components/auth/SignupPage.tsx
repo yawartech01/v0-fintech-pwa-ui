@@ -66,17 +66,17 @@ export function SignupPage({ onAuthChange }: SignupPageProps) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-dvh bg-background px-4">
-      <div className="w-full max-w-md space-y-8">
+    <div className="flex flex-col items-center justify-center min-h-dvh bg-background px-6">
+      <div className="w-full max-w-sm space-y-8">
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold">Create account</h1>
-          <p className="text-muted-foreground">Join VELTOX today</p>
+          <h1 className="text-3xl font-bold tracking-tight">Create account</h1>
+          <p className="text-muted-foreground text-[15px]">Join VELTOX today</p>
         </div>
 
-        <form onSubmit={handleSignup} className="space-y-4">
+        <form onSubmit={handleSignup} className="space-y-5">
           {/* Name Input */}
           <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
+            <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
             <Input
               id="name"
               type="text"
@@ -89,7 +89,7 @@ export function SignupPage({ onAuthChange }: SignupPageProps) {
 
           {/* Email Input */}
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-sm font-medium">Email</Label>
             <Input
               id="email"
               type="email"
@@ -102,22 +102,22 @@ export function SignupPage({ onAuthChange }: SignupPageProps) {
 
           {/* Password Input */}
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-sm font-medium">Password</Label>
             <div className="relative">
               <Input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
-                placeholder="••••••••"
+                placeholder="Create a strong password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={8}
-                className="pr-10"
+                className="pr-12"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground transition-colors rounded"
                 tabIndex={-1}
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -130,8 +130,8 @@ export function SignupPage({ onAuthChange }: SignupPageProps) {
 
           {/* Referral Code Input - Optional */}
           <div className="space-y-2">
-            <Label htmlFor="referralCode">
-              Referral Code <span className="text-muted-foreground text-xs">(Optional)</span>
+            <Label htmlFor="referralCode" className="text-sm font-medium">
+              Referral Code <span className="text-muted-foreground text-xs font-normal">(Optional)</span>
             </Label>
             <Input
               id="referralCode"
@@ -145,7 +145,7 @@ export function SignupPage({ onAuthChange }: SignupPageProps) {
             </p>
           </div>
 
-          <Button type="submit" className="w-full h-12" disabled={loading}>
+          <Button type="submit" className="w-full text-base" size="lg" disabled={loading}>
             {loading ? 'Creating account...' : 'Sign up'}
           </Button>
         </form>
@@ -153,7 +153,7 @@ export function SignupPage({ onAuthChange }: SignupPageProps) {
         <div className="text-center">
           <button
             onClick={() => navigate('/login')}
-            className="block w-full py-3 text-sm text-primary hover:underline"
+            className="block w-full py-3 text-sm text-primary hover:underline font-medium"
           >
             Already have an account? Login
           </button>

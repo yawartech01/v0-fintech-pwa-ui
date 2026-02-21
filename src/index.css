@@ -59,6 +59,9 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   /* Ensure touch-friendly sizing for form elements */
@@ -68,7 +71,9 @@
     min-height: 44px;
   }
 
-  /* Tap highlight for interactive cards */
+  /* Smooth transitions for interactive elements */
+  button,
+  a,
   [role="button"],
   .cursor-pointer {
     -webkit-tap-highlight-color: color-mix(in oklch, var(--primary), transparent 70%);

@@ -69,16 +69,18 @@ export function SupportPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Email */}
-          <div className="p-4 bg-secondary/30 rounded-lg space-y-2">
-            <div className="flex items-center gap-2 text-muted-foreground mb-2">
-              <Mail className="w-4 h-4" />
-              <p className="text-sm font-medium">Email Support</p>
+          <div className="p-4 bg-secondary/40 rounded-lg border border-border/40">
+            <div className="flex items-center gap-2.5 text-muted-foreground mb-3">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Mail className="w-4 h-4 text-primary" />
+              </div>
+              <p className="text-sm font-semibold text-foreground">Email Support</p>
             </div>
             <div className="flex items-center justify-between">
-              <p className="text-sm font-mono">{supportEmail}</p>
-              <Button onClick={handleCopyEmail} variant="ghost" size="sm">
+              <p className="text-sm font-mono text-muted-foreground">{supportEmail}</p>
+              <Button onClick={handleCopyEmail} variant="ghost" size="icon-sm">
                 {copiedEmail ? (
-                  <CheckCircle2 className="w-4 h-4 text-success" />
+                  <CheckCircle2 className="w-4 h-4 text-primary" />
                 ) : (
                   <Copy className="w-4 h-4" />
                 )}
@@ -87,10 +89,12 @@ export function SupportPage() {
           </div>
 
           {/* Telegram */}
-          <div className="p-4 bg-secondary/30 rounded-lg space-y-2">
-            <div className="flex items-center gap-2 text-muted-foreground mb-2">
-              <Send className="w-4 h-4" />
-              <p className="text-sm font-medium">Telegram Support</p>
+          <div className="p-4 bg-secondary/40 rounded-lg border border-border/40">
+            <div className="flex items-center gap-2.5 text-muted-foreground mb-3">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Send className="w-4 h-4 text-primary" />
+              </div>
+              <p className="text-sm font-semibold text-foreground">Telegram Support</p>
             </div>
             <div className="flex items-center justify-between">
               <a
@@ -101,9 +105,9 @@ export function SupportPage() {
               >
                 {supportTelegram}
               </a>
-              <Button onClick={handleCopyTelegram} variant="ghost" size="sm">
+              <Button onClick={handleCopyTelegram} variant="ghost" size="icon-sm">
                 {copiedTelegram ? (
-                  <CheckCircle2 className="w-4 h-4 text-success" />
+                  <CheckCircle2 className="w-4 h-4 text-primary" />
                 ) : (
                   <Copy className="w-4 h-4" />
                 )}
@@ -111,7 +115,7 @@ export function SupportPage() {
             </div>
           </div>
 
-          <p className="text-xs text-center text-muted-foreground">
+          <p className="text-xs text-center text-muted-foreground pt-1">
             Average response time: 24 hours
           </p>
         </CardContent>

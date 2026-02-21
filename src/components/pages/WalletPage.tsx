@@ -384,7 +384,7 @@ export function WalletPage() {
   return (
     <div className="space-y-4 pb-4">
       {/* Tabs */}
-      <div className="flex border-b border-border overflow-x-auto">
+      <div className="flex border-b border-border/60 bg-card rounded-t-xl overflow-hidden -mx-4 px-0">
         {[
           { id: 'overview' as const, label: 'Overview' },
           { id: 'deposit' as const, label: 'Deposit' },
@@ -394,7 +394,7 @@ export function WalletPage() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex-1 px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+            className={`flex-1 px-3 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === tab.id
                 ? 'border-primary text-primary'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -827,15 +827,16 @@ export function WalletPage() {
                   </p>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <Button
                     onClick={() => setWithdrawStep('form')}
                     variant="outline"
                     className="flex-1"
+                    size="lg"
                   >
                     Back
                   </Button>
-                  <Button onClick={handleWithdrawConfirm} className="flex-1">
+                  <Button onClick={handleWithdrawConfirm} className="flex-1" size="lg">
                     Confirm Withdrawal
                   </Button>
                 </div>

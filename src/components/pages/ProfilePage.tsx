@@ -58,8 +58,8 @@ function AvatarDisplay({
   onClick?: () => void
 }) {
   const theme = getTheme(themeId)
-  const dim = size === 'lg' ? 64 : 48
-  const fontSize = size === 'lg' ? '1.35rem' : '1rem'
+  const dim = size === 'lg' ? 72 : 48
+  const fontSize = size === 'lg' ? '1.5rem' : '1rem'
   return (
     <button
       onClick={onClick}
@@ -76,7 +76,8 @@ function AvatarDisplay({
         fontWeight: 700,
         color: '#fff',
         letterSpacing: '0.04em',
-        border: '2px solid rgba(255,255,255,0.15)',
+        border: '2px solid rgba(255,255,255,0.12)',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
         flexShrink: 0,
         cursor: onClick ? 'pointer' : 'default',
       }}
@@ -194,67 +195,74 @@ export function ProfilePage({ onAuthChange }: ProfilePageProps) {
     <div className="space-y-4 pb-4">
 
       {/* Profile Card */}
-      <Card>
-        <CardContent className="p-6">
-          <div className="flex items-start gap-4">
+      <Card className="overflow-hidden">
+        <CardContent className="p-0">
+          {/* Top gradient accent */}
+          <div className="h-1 bg-gradient-to-r from-primary/60 via-primary to-primary/60" />
+          
+          <div className="px-5 pt-5 pb-5">
+            <div className="flex items-center gap-4">
 
-            {/* Avatar — tap to change */}
-            <div className="relative shrink-0">
-              <AvatarDisplay
-                themeId={avatar}
-                initials={initials}
-                size="lg"
-                onClick={() => setShowAvatarPicker(true)}
-              />
-              <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-background border border-border flex items-center justify-center pointer-events-none">
-                <Pencil className="w-2.5 h-2.5 text-muted-foreground" />
+              {/* Avatar -- tap to change */}
+              <div className="relative shrink-0">
+                <AvatarDisplay
+                  themeId={avatar}
+                  initials={initials}
+                  size="lg"
+                  onClick={() => setShowAvatarPicker(true)}
+                />
+                <div className="absolute -bottom-0.5 -right-0.5 w-6 h-6 rounded-full bg-card border-2 border-border flex items-center justify-center pointer-events-none shadow-sm">
+                  <Pencil className="w-3 h-3 text-muted-foreground" />
+                </div>
               </div>
-            </div>
 
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              {/* Nickname row */}
-              {editingNickname ? (
-                <div className="flex items-center gap-1.5 mb-1">
-                  <Input
-                    value={nicknameInput}
-                    onChange={(e) => setNicknameInput(e.target.value)}
-                    onKeyDown={(e) => { if (e.key === 'Enter') handleSaveNickname(); if (e.key === 'Escape') setEditingNickname(false) }}
-                    className="h-8 text-base font-semibold px-2"
-                    maxLength={50}
-                    autoFocus
-                  />
-                  <button onClick={handleSaveNickname} disabled={saving} className="p-1 text-green-500 hover:text-green-400">
-                    <Check className="w-4 h-4" />
-                  </button>
-                  <button onClick={() => setEditingNickname(false)} className="p-1 text-muted-foreground hover:text-foreground">
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2 mb-1">
-                  <p className="text-lg font-semibold truncate">{nickname || 'Set nickname'}</p>
+              {/* Info */}
+              <div className="flex-1 min-w-0">
+                {/* Nickname row */}
+                {editingNickname ? (
+                  <div className="flex items-center gap-2">
+                    <Input
+                      value={nicknameInput}
+                      onChange={(e) => setNicknameInput(e.target.value)}
+                      onKeyDown={(e) => { if (e.key === 'Enter') handleSaveNickname(); if (e.key === 'Escape') setEditingNickname(false) }}
+                      className="h-10 text-base font-semibold px-3"
+                      maxLength={50}
+                      autoFocus
+                    />
+                    <button onClick={handleSaveNickname} disabled={saving} className="p-2.5 text-primary hover:text-primary/80 rounded-lg hover:bg-secondary/50 transition-colors">
+                      <Check className="w-5 h-5" />
+                    </button>
+                    <button onClick={() => setEditingNickname(false)} className="p-2.5 text-muted-foreground hover:text-foreground rounded-lg hover:bg-secondary/50 transition-colors">
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <p className="text-lg font-bold truncate leading-tight">{nickname || 'Set nickname'}</p>
+                    <button
+                      onClick={() => { setNicknameInput(nickname); setEditingNickname(true) }}
+                      className="p-1.5 text-muted-foreground hover:text-primary hover:bg-secondary/50 rounded-md transition-colors shrink-0"
+                      title="Edit nickname"
+                    >
+                      <Pencil className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+
+                {/* UID */}
+                {formattedUID && (
                   <button
-                    onClick={() => { setNicknameInput(nickname); setEditingNickname(true) }}
-                    className="text-muted-foreground hover:text-primary transition-colors shrink-0"
-                    title="Edit nickname"
+                    onClick={handleCopyUID}
+                    className="flex items-center gap-1.5 mt-1.5 group"
+                    title="Copy UID"
                   >
-                    <Pencil className="w-3.5 h-3.5" />
+                    <span className="text-xs font-mono font-semibold text-primary tracking-wide">
+                      {formattedUID}
+                    </span>
+                    <Copy className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
                   </button>
-                </div>
-              )}
-
-              {/* UID */}
-              {formattedUID && (
-                <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-mono font-bold text-primary tracking-wide">
-                    {formattedUID}
-                  </span>
-                  <button onClick={handleCopyUID} className="text-muted-foreground hover:text-primary transition-colors" title="Copy UID">
-                    <Copy className="w-3 h-3" />
-                  </button>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </CardContent>
@@ -265,86 +273,102 @@ export function ProfilePage({ onAuthChange }: ProfilePageProps) {
         <div className="fixed inset-0 z-50 flex items-end justify-center" onClick={() => setShowAvatarPicker(false)}>
           <div className="absolute inset-0 bg-black/60" />
           <div
-            className="relative z-10 w-full max-w-sm bg-background rounded-t-2xl p-5 shadow-2xl"
+            className="relative z-10 w-full max-w-md bg-card rounded-t-2xl shadow-2xl safe-bottom"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between mb-1">
-              <h3 className="font-semibold">Choose Color</h3>
-              <button onClick={() => setShowAvatarPicker(false)} className="text-muted-foreground hover:text-foreground">
-                <X className="w-5 h-5" />
-              </button>
+            {/* Handle bar */}
+            <div className="flex justify-center pt-3 pb-1">
+              <div className="w-10 h-1 rounded-full bg-muted-foreground/30" />
             </div>
-            <p className="text-xs text-muted-foreground mb-4">Your initials will appear on the selected color.</p>
-            <div className="grid grid-cols-4 gap-3">
-              {AVATAR_THEMES.map((theme) => (
-                <button
-                  key={theme.id}
-                  onClick={() => handleSelectAvatar(theme.id)}
-                  className={`flex flex-col items-center gap-1.5 p-2 rounded-xl transition-all ${
-                    avatar === theme.id
-                      ? 'bg-primary/10 ring-2 ring-primary'
-                      : 'hover:bg-secondary/60'
-                  }`}
-                >
-                  <div
-                    style={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: '50%',
-                      background: `linear-gradient(135deg, ${theme.from}, ${theme.to})`,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '0.9rem',
-                      fontWeight: 700,
-                      color: '#fff',
-                      letterSpacing: '0.04em',
-                    }}
-                  >
-                    {initials}
-                  </div>
-                  <span className="text-[10px] text-muted-foreground leading-none">{theme.label}</span>
+            
+            <div className="px-5 pb-6">
+              <div className="flex items-center justify-between mb-1">
+                <h3 className="text-base font-semibold">Choose Avatar Color</h3>
+                <button onClick={() => setShowAvatarPicker(false)} className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors">
+                  <X className="w-5 h-5" />
                 </button>
-              ))}
+              </div>
+              <p className="text-sm text-muted-foreground mb-5">Your initials will appear on the selected color.</p>
+              <div className="grid grid-cols-4 gap-3">
+                {AVATAR_THEMES.map((theme) => (
+                  <button
+                    key={theme.id}
+                    onClick={() => handleSelectAvatar(theme.id)}
+                    className={`flex flex-col items-center gap-2 p-2.5 rounded-xl transition-all ${
+                      avatar === theme.id
+                        ? 'bg-primary/10 ring-2 ring-primary ring-offset-1 ring-offset-card'
+                        : 'hover:bg-secondary/60'
+                    }`}
+                  >
+                    <div
+                      style={{
+                        width: 48,
+                        height: 48,
+                        borderRadius: '50%',
+                        background: `linear-gradient(135deg, ${theme.from}, ${theme.to})`,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '0.95rem',
+                        fontWeight: 700,
+                        color: '#fff',
+                        letterSpacing: '0.04em',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                      }}
+                    >
+                      {initials}
+                    </div>
+                    <span className="text-[11px] text-muted-foreground leading-none font-medium">{theme.label}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Admin Panel */}
-      {isAdmin && (
-        <Card className="cursor-pointer hover:bg-secondary/50 transition-colors" onClick={() => navigate('/admin')}>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Settings className="w-5 h-5 text-warning" />
-                <span className="font-medium text-warning">Admin Panel</span>
-              </div>
-              <ChevronRight className="w-5 h-5 text-muted-foreground" />
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
       {/* Menu Items */}
-      <div className="space-y-2">
-        {menuItems.map((item) => {
-          const Icon = item.icon
-          return (
-            <Card key={item.path} className="cursor-pointer hover:bg-secondary/50 active:bg-secondary/70 transition-colors" onClick={() => navigate(item.path)}>
-              <CardContent className="py-4 px-5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Icon className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-[15px]">{item.label}</span>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+      <Card className="overflow-hidden">
+        <CardContent className="p-0">
+          {/* Admin Panel - shown first if admin */}
+          {isAdmin && (
+            <button
+              onClick={() => navigate('/admin')}
+              className="flex items-center justify-between w-full px-5 py-4 hover:bg-secondary/40 active:bg-secondary/60 transition-colors border-b border-border/50"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-9 h-9 rounded-lg bg-warning/10 flex items-center justify-center">
+                  <Settings className="w-[18px] h-[18px] text-warning" />
                 </div>
-              </CardContent>
-            </Card>
-          )
-        })}
-      </div>
+                <span className="text-[15px] font-medium text-warning">Admin Panel</span>
+              </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground/60" />
+            </button>
+          )}
+          
+          {menuItems.map((item, index) => {
+            const Icon = item.icon
+            const isLast = index === menuItems.length - 1
+            return (
+              <button
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                className={`flex items-center justify-between w-full px-5 py-4 hover:bg-secondary/40 active:bg-secondary/60 transition-colors ${
+                  !isLast ? 'border-b border-border/50' : ''
+                }`}
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Icon className="w-[18px] h-[18px] text-primary" />
+                  </div>
+                  <span className="text-[15px] font-medium">{item.label}</span>
+                </div>
+                <ChevronRight className="w-5 h-5 text-muted-foreground/60" />
+              </button>
+            )
+          })}
+        </CardContent>
+      </Card>
 
       {/* Logout */}
       <Button onClick={handleLogout} variant="destructive" className="w-full" size="lg">

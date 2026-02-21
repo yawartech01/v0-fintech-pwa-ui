@@ -133,16 +133,16 @@ export function HomePage() {
     <div className="space-y-4 pb-4">
       {/* Platform Banner */}
       {showBanner && bannerMessage && (
-        <Card className="bg-secondary/50 border-border/60">
-          <CardContent className="px-3 py-2.5">
-            <div className="flex items-start gap-2.5">
-              <Info className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
-              <div className="flex-1 min-w-0 space-y-1">
+        <Card className="bg-secondary/50 border-border/50">
+          <CardContent className="px-4 py-3">
+            <div className="flex items-start gap-3">
+              <Info className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+              <div className="flex-1 min-w-0">
                 <p className="text-sm text-foreground leading-snug">{bannerMessage}</p>
               </div>
               <button
                 onClick={() => setShowBanner(false)}
-                className="p-1 text-muted-foreground hover:text-foreground transition-colors flex-shrink-0 -mr-1 -mt-0.5"
+                className="p-2 -mr-2 -mt-1 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors flex-shrink-0"
                 aria-label="Dismiss"
               >
                 <X className="w-4 h-4" />

@@ -182,18 +182,18 @@ export function AppShell() {
   return (
     <div className="flex flex-col h-dvh bg-background">
       {/* Fixed Header */}
-      <header className="flex-shrink-0 flex items-center justify-between px-4 h-14 border-b border-border/60 bg-card safe-top">
-        <div className="flex items-center gap-3">
+      <header className="flex-shrink-0 flex items-center justify-between px-4 h-14 border-b border-border/50 bg-card safe-top">
+        <div className="flex items-center gap-2">
           {showBack ? (
             <button
               onClick={() => navigate(-1)}
-              className="p-1.5 -ml-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors min-h-11 min-w-11"
+              className="p-2 -ml-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
               aria-label="Go back"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
           ) : null}
-          <h1 className="text-base font-semibold text-foreground">{getTitle()}</h1>
+          <h1 className="text-base font-bold text-foreground tracking-tight">{getTitle()}</h1>
         </div>
 
         {/* Notification Bell */}
@@ -222,7 +222,7 @@ export function AppShell() {
 
       {/* Fixed Bottom Navigation - Only show on main tabs */}
       {isMainTab && (
-        <nav className="flex-shrink-0 border-t border-border/60 bg-card safe-bottom">
+        <nav className="flex-shrink-0 border-t border-border/50 bg-card safe-bottom">
           <div className="flex items-center justify-around h-[4.5rem]">
             {tabs.map((tab) => {
               const Icon = tab.icon
