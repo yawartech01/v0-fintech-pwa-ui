@@ -33,9 +33,6 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       const url = error.config?.url || ''
       const isAuthEndpoint = url.includes('/auth/')
-      // #region agent log
-      fetch('http://localhost:7585/ingest/21d26861-f749-47b4-a8b9-9a94fd0fa5f3',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'9bcb79'},body:JSON.stringify({sessionId:'9bcb79',location:'api-client.ts:401interceptor',message:'401 caught',data:{url,isAuthEndpoint,willRedirect:!isAuthEndpoint,hasToken:!!localStorage.getItem('auth_token')},timestamp:Date.now(),hypothesisId:'H-401'})}).catch(()=>{});
-      // #endregion
       if (!isAuthEndpoint) {
         localStorage.removeItem('auth_token')
         localStorage.removeItem('user_id')

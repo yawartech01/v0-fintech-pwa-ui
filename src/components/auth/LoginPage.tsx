@@ -27,10 +27,6 @@ export function LoginPage({ onAuthChange }: LoginPageProps) {
     e.preventDefault()
     setLoading(true)
 
-    // #region agent log
-    fetch('http://localhost:7585/ingest/21d26861-f749-47b4-a8b9-9a94fd0fa5f3',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'9bcb79'},body:JSON.stringify({sessionId:'9bcb79',location:'LoginPage.tsx:submit',message:'Login attempt',data:{email,passwordLength:password.length,useAPI},timestamp:Date.now(),hypothesisId:'H-CRED'})}).catch(()=>{});
-    // #endregion
-
     try {
       if (useAPI) {
         // Real API login
@@ -57,10 +53,6 @@ export function LoginPage({ onAuthChange }: LoginPageProps) {
         navigate('/')
       }
     } catch (error: any) {
-      console.error('Login error:', error)
-      // #region agent log
-      fetch('http://localhost:7585/ingest/21d26861-f749-47b4-a8b9-9a94fd0fa5f3',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'9bcb79'},body:JSON.stringify({sessionId:'9bcb79',location:'LoginPage.tsx:catch',message:'Login failed',data:{errorMsg:error?.response?.data?.error,status:error?.response?.status,message:error?.message},timestamp:Date.now(),hypothesisId:'H-CRED'})}).catch(()=>{});
-      // #endregion
       const errorMsg = error.response?.data?.error || 'Login failed. Please check your credentials.'
       showToast(errorMsg, 'error')
     } finally {
