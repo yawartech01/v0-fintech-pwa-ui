@@ -215,7 +215,7 @@ export function AppShell() {
 
       {/* Scrollable Content */}
       <main className="flex-1 overflow-y-auto overflow-x-hidden">
-        <div className="px-4 py-4">
+        <div className="py-4">
           <Outlet />
         </div>
       </main>

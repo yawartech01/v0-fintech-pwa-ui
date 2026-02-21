@@ -143,9 +143,9 @@ function AdDetailSheet({
 
           {/* Completion & Receipt */}
           {isCompleted && (
-            <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 space-y-2">
-              <p className="text-sm font-semibold text-green-600 dark:text-green-400">
-                ✓ Payment Processed by Company
+            <div className="p-3 rounded-lg bg-secondary/40 border border-border/50 space-y-2">
+              <p className="text-sm font-medium text-muted-foreground">
+                Payment Processed
               </p>
               {ad.paymentReceipt && (
                 <Button
@@ -335,7 +335,7 @@ export function SellAdsPage() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div className="flex-1 overflow-y-auto py-3 space-y-3">
         {filteredAds.length === 0 ? (
           <Card className="p-8 text-center">
             <p className="text-muted-foreground mb-4">
@@ -397,11 +397,8 @@ export function SellAdsPage() {
 
                 {/* Completed confirmation */}
                 {isCompleted && (
-                  <div className="mt-2 p-2 rounded bg-green-500/10 border border-green-500/20">
-                    <p className="text-xs text-green-600 dark:text-green-400">
-                      ✓ Payment processed — tap to view details
-                      {ad.paymentReceipt && ' & receipt'}
-                    </p>
+                  <div className="mt-2 flex items-center gap-1.5">
+                    <span className="text-xs text-muted-foreground">Tap to view details{ad.paymentReceipt ? ' & receipt' : ''}</span>
                   </div>
                 )}
               </Card>

@@ -371,10 +371,12 @@ export function ProfilePage({ onAuthChange }: ProfilePageProps) {
       </Card>
 
       {/* Logout */}
-      <Button onClick={handleLogout} variant="destructive" className="w-full" size="lg">
-        <LogOut className="w-5 h-5 mr-2" />
-        Logout
-      </Button>
+      <div className="px-4">
+        <Button onClick={handleLogout} variant="destructive" className="w-full" size="lg">
+          <LogOut className="w-5 h-5 mr-2" />
+          Logout
+        </Button>
+      </div>
     </div>
   )
 }

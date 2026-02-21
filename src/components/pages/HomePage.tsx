@@ -130,7 +130,7 @@ export function HomePage() {
   }
 
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
       {/* Platform Banner */}
       {showBanner && bannerMessage && (
         <Card className="bg-secondary/50 border-border/50">
@@ -180,44 +180,41 @@ export function HomePage() {
         </CardContent>
       </Card>
 
-      {/* Balance Card */}
+      {/* Balance Card - Compact */}
       <Card>
-        <CardContent className="p-5">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">USDT Balance</p>
-          <p className="text-4xl font-bold tracking-tight">
+        <CardContent className="p-4">
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">USDT Balance</p>
+            <Button
+              onClick={() => navigate('/wallet')}
+              variant="ghost"
+              size="sm"
+              className="text-xs text-primary -mr-2"
+            >
+              View Wallet
+            </Button>
+          </div>
+          <p className="text-2xl font-bold tracking-tight">
             {formatNumber(totalBalance)}
-            <span className="text-lg font-medium text-muted-foreground ml-2">USDT</span>
+            <span className="text-sm font-medium text-muted-foreground ml-1.5">USDT</span>
           </p>
           {(availableUsdt > 0 || lockedUsdt > 0) && (
-            <div className="border-t border-border/50 mt-4 pt-4 flex">
-              <div className="flex-1">
-                <p className="text-xs text-muted-foreground mb-0.5">Available</p>
-                <p className="text-base font-bold">{formatNumber(availableUsdt)} <span className="text-xs font-medium text-muted-foreground">USDT</span></p>
-              </div>
+            <div className="flex gap-4 mt-2 text-xs text-muted-foreground">
+              <span>Available: <span className="font-semibold text-foreground">{formatNumber(availableUsdt)}</span></span>
               {lockedUsdt > 0 && (
-                <div className="flex-1">
-                  <p className="text-xs text-muted-foreground mb-0.5">Locked in Ads</p>
-                  <p className="text-base font-bold">{formatNumber(lockedUsdt)} <span className="text-xs font-medium text-muted-foreground">USDT</span></p>
-                </div>
+                <span>Locked: <span className="font-semibold text-foreground">{formatNumber(lockedUsdt)}</span></span>
               )}
             </div>
           )}
-          <Button
-            onClick={() => navigate('/wallet')}
-            variant="outline"
-            className="w-full mt-4"
-          >
-            View Wallet
-          </Button>
         </CardContent>
       </Card>
 
       {/* Quick Actions */}
-      <div>
+      <div className="px-4">
         <h2 className="text-base font-semibold mb-3">Quick Actions</h2>
         <div className="grid grid-cols-3 gap-3">
           <Card
-            className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all"
+            className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all rounded-xl border-x"
             onClick={() => navigate('/sell-ads/create')}
           >
             <CardContent className="p-5 text-center">
@@ -226,7 +223,7 @@ export function HomePage() {
             </CardContent>
           </Card>
           <Card
-            className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all"
+            className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all rounded-xl border-x"
             onClick={() => navigate('/wallet?tab=deposit')}
           >
             <CardContent className="p-5 text-center">
@@ -235,7 +232,7 @@ export function HomePage() {
             </CardContent>
           </Card>
           <Card
-            className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all"
+            className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all rounded-xl border-x"
             onClick={() => navigate('/wallet?tab=withdraw')}
           >
             <CardContent className="p-5 text-center">
@@ -248,7 +245,7 @@ export function HomePage() {
 
       {/* Recent Activity Feed */}
       <div>
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-3 px-4">
           <h2 className="text-base font-semibold">Recent Activity</h2>
           <Button onClick={loadData} variant="ghost" size="sm">
             <RefreshCw className={`w-4 h-4 mr-1.5 ${loading ? 'animate-spin' : ''}`} />

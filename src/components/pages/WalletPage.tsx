@@ -384,7 +384,7 @@ export function WalletPage() {
   return (
     <div className="space-y-4 pb-4">
       {/* Tabs */}
-      <div className="flex border-b border-border/60 bg-card rounded-t-xl overflow-hidden -mx-4 px-0">
+      <div className="flex border-b border-border/60 bg-card overflow-hidden">
         {[
           { id: 'overview' as const, label: 'Overview' },
           { id: 'deposit' as const, label: 'Deposit' },
@@ -430,7 +430,7 @@ export function WalletPage() {
           </Card>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 px-4">
             <Button onClick={() => setActiveTab('deposit')} className="w-full" size="lg">
               <ArrowDownCircle className="w-5 h-5 mr-2" />
               Deposit

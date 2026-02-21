@@ -6,7 +6,7 @@ export function ReferralPage() {
     <div className="space-y-4 pb-4">
 
       {/* Coming Soon Banner */}
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20">
+      <div className="flex items-start gap-3 p-4 bg-yellow-500/10 border-y border-yellow-500/20">
         <Clock className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
         <div>
           <p className="text-sm font-semibold text-yellow-600 dark:text-yellow-400">
