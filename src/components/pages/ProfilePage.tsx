@@ -331,12 +331,12 @@ export function ProfilePage({ onAuthChange }: ProfilePageProps) {
         {menuItems.map((item) => {
           const Icon = item.icon
           return (
-            <Card key={item.path} className="cursor-pointer hover:bg-secondary/50 transition-colors" onClick={() => navigate(item.path)}>
-              <CardContent className="p-4">
+            <Card key={item.path} className="cursor-pointer hover:bg-secondary/50 active:bg-secondary/70 transition-colors" onClick={() => navigate(item.path)}>
+              <CardContent className="py-4 px-5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <Icon className="w-5 h-5 text-primary" />
-                    <span className="font-medium">{item.label}</span>
+                    <span className="font-medium text-[15px]">{item.label}</span>
                   </div>
                   <ChevronRight className="w-5 h-5 text-muted-foreground" />
                 </div>
@@ -347,8 +347,8 @@ export function ProfilePage({ onAuthChange }: ProfilePageProps) {
       </div>
 
       {/* Logout */}
-      <Button onClick={handleLogout} variant="destructive" className="w-full">
-        <LogOut className="w-4 h-4 mr-2" />
+      <Button onClick={handleLogout} variant="destructive" className="w-full" size="lg">
+        <LogOut className="w-5 h-5 mr-2" />
         Logout
       </Button>
     </div>

@@ -153,7 +153,7 @@ export function SignupPage({ onAuthChange }: SignupPageProps) {
         <div className="text-center">
           <button
             onClick={() => navigate('/login')}
-            className="text-sm text-primary hover:underline"
+            className="block w-full py-3 text-sm text-primary hover:underline"
           >
             Already have an account? Login
           </button>

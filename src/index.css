@@ -61,20 +61,17 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
-  /* Ensure tap targets are at least 44px */
+  /* Ensure tap targets are at least 44px for interactive elements */
   button,
   a,
+  [role="button"] {
+    min-height: 44px;
+  }
+
   input,
   select,
   textarea {
     min-height: 44px;
-    min-width: 44px;
-  }
-
-  /* Or for inline elements */
-  button:not(.btn-sm),
-  a:not(.link-sm) {
-    @apply min-h-11 min-w-11;
   }
 
   /* Tap highlight for interactive cards */

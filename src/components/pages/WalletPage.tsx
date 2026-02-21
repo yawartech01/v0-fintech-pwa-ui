@@ -384,7 +384,7 @@ export function WalletPage() {
   return (
     <div className="space-y-4 pb-4">
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-border overflow-x-auto">
+      <div className="flex border-b border-border overflow-x-auto">
         {[
           { id: 'overview' as const, label: 'Overview' },
           { id: 'deposit' as const, label: 'Deposit' },
@@ -394,7 +394,7 @@ export function WalletPage() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+            className={`flex-1 px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === tab.id
                 ? 'border-primary text-primary'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -434,13 +434,13 @@ export function WalletPage() {
           </div>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-2 gap-2">
-            <Button onClick={() => setActiveTab('deposit')} className="w-full">
-              <ArrowDownCircle className="w-4 h-4 mr-2" />
+          <div className="grid grid-cols-2 gap-3">
+            <Button onClick={() => setActiveTab('deposit')} className="w-full" size="lg">
+              <ArrowDownCircle className="w-5 h-5 mr-2" />
               Deposit
             </Button>
-            <Button onClick={() => setActiveTab('withdraw')} variant="outline" className="w-full">
-              <ArrowUpCircle className="w-4 h-4 mr-2" />
+            <Button onClick={() => setActiveTab('withdraw')} variant="outline" className="w-full" size="lg">
+              <ArrowUpCircle className="w-5 h-5 mr-2" />
               Withdraw
             </Button>
           </div>
@@ -863,7 +863,7 @@ export function WalletPage() {
                   <button
                     key={filter.id}
                     onClick={() => setHistoryFilter(filter.id)}
-                    className={`px-3 py-1 text-sm rounded-full whitespace-nowrap transition-colors ${
+                    className={`px-4 py-2 text-sm rounded-full whitespace-nowrap transition-colors ${
                       historyFilter === filter.id
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-muted text-muted-foreground hover:bg-muted/80'

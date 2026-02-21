@@ -163,11 +163,11 @@ function AdDetailSheet({
 
           {/* Actions for active/processing ads */}
           {!isCompleted && (
-            <div className="flex gap-2 pt-1">
-              <Button onClick={() => { onRequestEdit(ad); onClose() }} size="sm" variant="outline" className="flex-1">
+            <div className="flex gap-3 pt-1">
+              <Button onClick={() => { onRequestEdit(ad); onClose() }} variant="outline" className="flex-1">
                 Request Edit
               </Button>
-              <Button onClick={() => { onClose(); onRequestDelete(ad) }} size="sm" variant="outline" className="flex-1">
+              <Button onClick={() => { onClose(); onRequestDelete(ad) }} variant="outline" className="flex-1">
                 Request Delete
               </Button>
             </div>
@@ -311,7 +311,7 @@ export function SellAdsPage() {
             <h1 className="text-xl font-bold text-foreground">Sell Ads</h1>
             <p className="text-sm text-muted-foreground">Manage your USDT sell listings</p>
           </div>
-          <Button onClick={() => navigate('/sell-ads/create')} size="sm" className="gap-2">
+          <Button onClick={() => navigate('/sell-ads/create')} className="gap-2">
             <Plus className="w-4 h-4" />
             Create Ad
           </Button>
@@ -323,7 +323,7 @@ export function SellAdsPage() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 filter === f
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'

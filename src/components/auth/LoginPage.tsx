@@ -111,22 +111,20 @@ export function LoginPage({ onAuthChange }: LoginPageProps) {
           </Button>
         </form>
 
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-2">
           <button
             onClick={() => navigate('/forgot-password')}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            className="block w-full py-3 text-sm text-muted-foreground hover:text-primary transition-colors"
           >
             Forgot password?
           </button>
           
-          <div>
-            <button
-              onClick={() => navigate('/signup')}
-              className="text-sm text-primary hover:underline"
-            >
-              Don't have an account? Sign up
-            </button>
-          </div>
+          <button
+            onClick={() => navigate('/signup')}
+            className="block w-full py-3 text-sm text-primary hover:underline"
+          >
+            {"Don't have an account? Sign up"}
+          </button>
         </div>
       </div>
     </div>

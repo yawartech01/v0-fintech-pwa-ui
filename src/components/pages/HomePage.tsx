@@ -202,7 +202,6 @@ export function HomePage() {
             <Button
               onClick={() => navigate('/wallet')}
               variant="outline"
-              size="sm"
               className="w-full mt-2"
             >
               View Wallet
@@ -219,27 +218,27 @@ export function HomePage() {
             className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all"
             onClick={() => navigate('/sell-ads/create')}
           >
-            <CardContent className="p-4 text-center">
-              <Plus className="w-6 h-6 mx-auto mb-2 text-foreground" />
-              <p className="text-xs font-medium text-foreground">Create Ad</p>
+            <CardContent className="p-5 text-center">
+              <Plus className="w-7 h-7 mx-auto mb-2 text-primary" />
+              <p className="text-sm font-medium text-foreground">Create Ad</p>
             </CardContent>
           </Card>
           <Card
             className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all"
             onClick={() => navigate('/wallet?tab=deposit')}
           >
-            <CardContent className="p-4 text-center">
-              <ArrowDownCircle className="w-6 h-6 mx-auto mb-2 text-foreground" />
-              <p className="text-xs font-medium text-foreground">Deposit</p>
+            <CardContent className="p-5 text-center">
+              <ArrowDownCircle className="w-7 h-7 mx-auto mb-2 text-primary" />
+              <p className="text-sm font-medium text-foreground">Deposit</p>
             </CardContent>
           </Card>
           <Card
             className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all"
             onClick={() => navigate('/wallet?tab=withdraw')}
           >
-            <CardContent className="p-4 text-center">
-              <ArrowUpCircle className="w-6 h-6 mx-auto mb-2 text-foreground" />
-              <p className="text-xs font-medium text-foreground">Withdraw</p>
+            <CardContent className="p-5 text-center">
+              <ArrowUpCircle className="w-7 h-7 mx-auto mb-2 text-primary" />
+              <p className="text-sm font-medium text-foreground">Withdraw</p>
             </CardContent>
           </Card>
         </div>
@@ -249,8 +248,8 @@ export function HomePage() {
       <div>
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-base font-semibold">Recent Activity</h2>
-          <Button onClick={loadData} variant="ghost" size="sm" className="h-8 text-xs">
-            <RefreshCw className={`w-3 h-3 mr-1 ${loading ? 'animate-spin' : ''}`} />
+          <Button onClick={loadData} variant="ghost" size="sm">
+            <RefreshCw className={`w-4 h-4 mr-1.5 ${loading ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
         </div>
@@ -316,7 +315,6 @@ export function HomePage() {
               onClick={() => navigate('/wallet')}
               variant="ghost"
               size="sm"
-              className="text-xs"
             >
               View All Transactions
             </Button>
