@@ -239,7 +239,7 @@ export function BankAccountsPage() {
           <h1 className="text-xl font-bold">Bank Accounts</h1>
           <p className="text-sm text-muted-foreground">Manage your payment methods</p>
         </div>
-        <Button onClick={() => setShowForm(true)} size="sm">
+        <Button onClick={() => setShowForm(true)}>
           <Plus className="w-4 h-4 mr-2" />Add
         </Button>
       </div>

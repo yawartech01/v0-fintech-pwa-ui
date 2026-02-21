@@ -151,7 +151,6 @@ function AdDetailSheet({
                 <Button
                   onClick={() => window.open(`${apiBase}${ad.paymentReceipt}`, '_blank')}
                   variant="outline"
-                  size="sm"
                   className="w-full gap-2"
                 >
                   <ExternalLink className="w-4 h-4" />

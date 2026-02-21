@@ -61,13 +61,7 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
-  /* Ensure tap targets are at least 44px for interactive elements */
-  button,
-  a,
-  [role="button"] {
-    min-height: 44px;
-  }
-
+  /* Ensure touch-friendly sizing for form elements */
   input,
   select,
   textarea {

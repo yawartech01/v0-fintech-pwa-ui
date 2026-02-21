@@ -660,7 +660,6 @@ export function WalletPage() {
               {depositStatus === 'confirmed' && (
                 <Button
                   variant="outline"
-                  size="sm"
                   className="w-full"
                   onClick={() => {
                     setTxHashInput('')

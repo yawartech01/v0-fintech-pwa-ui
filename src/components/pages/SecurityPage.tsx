@@ -111,7 +111,6 @@ export function SecurityPage() {
               <Button
                 type="button"
                 variant="ghost"
-                size="sm"
                 onClick={() => setShowPasswords(!showPasswords)}
               >
                 {showPasswords ? (
