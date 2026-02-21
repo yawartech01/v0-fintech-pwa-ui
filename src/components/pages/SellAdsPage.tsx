@@ -48,7 +48,7 @@ function AdDetailSheet({
 
       {/* Sheet */}
       <div
-        className="relative z-10 w-full max-w-lg bg-background rounded-t-2xl shadow-2xl max-h-[85vh] overflow-y-auto"
+        className="relative z-10 w-full max-w-lg bg-card rounded-t-2xl shadow-2xl max-h-[85vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Handle bar */}
@@ -151,7 +151,6 @@ function AdDetailSheet({
                 <Button
                   onClick={() => window.open(`${apiBase}${ad.paymentReceipt}`, '_blank')}
                   variant="outline"
-                  size="sm"
                   className="w-full gap-2"
                 >
                   <ExternalLink className="w-4 h-4" />
@@ -163,11 +162,11 @@ function AdDetailSheet({
 
           {/* Actions for active/processing ads */}
           {!isCompleted && (
-            <div className="flex gap-2 pt-1">
-              <Button onClick={() => { onRequestEdit(ad); onClose() }} size="sm" variant="outline" className="flex-1">
+            <div className="flex gap-3 pt-1">
+              <Button onClick={() => { onRequestEdit(ad); onClose() }} variant="outline" className="flex-1">
                 Request Edit
               </Button>
-              <Button onClick={() => { onClose(); onRequestDelete(ad) }} size="sm" variant="outline" className="flex-1">
+              <Button onClick={() => { onClose(); onRequestDelete(ad) }} variant="outline" className="flex-1">
                 Request Delete
               </Button>
             </div>
@@ -305,13 +304,13 @@ export function SellAdsPage() {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="flex-none border-b border-border bg-background px-4 py-3">
+      <div className="flex-none border-b border-border/60 bg-card px-4 py-4">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold text-foreground">Sell Ads</h1>
-            <p className="text-sm text-muted-foreground">Manage your USDT sell listings</p>
+            <p className="text-sm text-muted-foreground mt-0.5">Manage your USDT sell listings</p>
           </div>
-          <Button onClick={() => navigate('/sell-ads/create')} size="sm" className="gap-2">
+          <Button onClick={() => navigate('/sell-ads/create')} className="gap-2">
             <Plus className="w-4 h-4" />
             Create Ad
           </Button>
@@ -323,9 +322,9 @@ export function SellAdsPage() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+              className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 filter === f
-                  ? 'bg-primary text-primary-foreground'
+                  ? 'bg-primary text-primary-foreground shadow-sm'
                   : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
               }`}
             >
@@ -358,7 +357,7 @@ export function SellAdsPage() {
             return (
               <Card
                 key={ad.id}
-                className="p-4 cursor-pointer hover:bg-secondary/20 transition-colors active:scale-[0.99]"
+                className="p-4 cursor-pointer hover:bg-secondary/30 active:bg-secondary/40 transition-all active:scale-[0.99]"
                 onClick={() => setSelectedAd(ad)}
               >
                 <div className="flex items-start justify-between mb-2">

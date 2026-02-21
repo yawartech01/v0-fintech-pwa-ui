@@ -219,9 +219,9 @@ export function BankAccountsPage() {
                 </div>
                 <Switch checked={formData.isDefault} onCheckedChange={(c) => setFormData({ ...formData, isDefault: c })} />
               </div>
-              <div className="flex gap-2 pt-4">
-                <Button type="button" variant="outline" onClick={resetForm} className="flex-1">Cancel</Button>
-                <Button type="submit" className="flex-1" disabled={submitting}>
+              <div className="flex gap-3 pt-4">
+                <Button type="button" variant="outline" onClick={resetForm} className="flex-1" size="lg">Cancel</Button>
+                <Button type="submit" className="flex-1" size="lg" disabled={submitting}>
                   {submitting ? 'Saving...' : editingAccount ? 'Update Account' : 'Add Account'}
                 </Button>
               </div>
@@ -239,7 +239,7 @@ export function BankAccountsPage() {
           <h1 className="text-xl font-bold">Bank Accounts</h1>
           <p className="text-sm text-muted-foreground">Manage your payment methods</p>
         </div>
-        <Button onClick={() => setShowForm(true)} size="sm">
+        <Button onClick={() => setShowForm(true)}>
           <Plus className="w-4 h-4 mr-2" />Add
         </Button>
       </div>
@@ -282,16 +282,16 @@ export function BankAccountsPage() {
                     <span className="font-mono">{account.ifscCode}</span>
                   </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 pt-1">
                   {!account.isDefault && useAPI && (
-                    <Button onClick={() => handleSetDefault(account.id)} variant="outline" size="sm" className="flex-1">
+                    <Button onClick={() => handleSetDefault(account.id)} variant="outline" className="flex-1">
                       <Check className="w-4 h-4 mr-2" />Set Default
                     </Button>
                   )}
-                  <Button onClick={() => handleEdit(account)} variant="outline" size="sm" className="flex-1">
+                  <Button onClick={() => handleEdit(account)} variant="outline" className="flex-1">
                     <Edit2 className="w-4 h-4 mr-2" />Edit
                   </Button>
-                  <Button onClick={() => setShowDeleteConfirm(account.id)} variant="destructive" size="sm" className="flex-1">
+                  <Button onClick={() => setShowDeleteConfirm(account.id)} variant="destructive" className="flex-1">
                     <Trash2 className="w-4 h-4 mr-2" />Delete
                   </Button>
                 </div>
@@ -311,9 +311,9 @@ export function BankAccountsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-sm text-muted-foreground">Are you sure? This cannot be undone.</p>
-              <div className="flex gap-2">
-                <Button onClick={() => setShowDeleteConfirm(null)} variant="outline" className="flex-1">Cancel</Button>
-                <Button onClick={() => handleDelete(showDeleteConfirm)} variant="destructive" className="flex-1">Delete</Button>
+              <div className="flex gap-3">
+                <Button onClick={() => setShowDeleteConfirm(null)} variant="outline" className="flex-1" size="lg">Cancel</Button>
+                <Button onClick={() => handleDelete(showDeleteConfirm)} variant="destructive" className="flex-1" size="lg">Delete</Button>
               </div>
             </CardContent>
           </Card>

@@ -59,14 +59,14 @@ function NotificationPanel({
             {unreadCount > 0 && (
               <button
                 onClick={onMarkAllRead}
-                className="text-xs text-primary hover:text-primary/80 flex items-center gap-1 px-2 py-1 rounded hover:bg-secondary/50 transition-colors"
+                className="text-xs text-primary hover:text-primary/80 flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-secondary/50 transition-colors"
               >
-                <CheckCheck className="w-3.5 h-3.5" />
+                <CheckCheck className="w-4 h-4" />
                 Mark all read
               </button>
             )}
-            <button onClick={onClose} className="p-1 rounded hover:bg-secondary/50 transition-colors">
-              <X className="w-4 h-4" />
+            <button onClick={onClose} className="p-2.5 rounded-lg hover:bg-secondary/50 transition-colors">
+              <X className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -182,18 +182,18 @@ export function AppShell() {
   return (
     <div className="flex flex-col h-dvh bg-background">
       {/* Fixed Header */}
-      <header className="flex-shrink-0 flex items-center justify-between px-4 h-14 border-b border-border/60 bg-card safe-top">
-        <div className="flex items-center gap-3">
+      <header className="flex-shrink-0 flex items-center justify-between px-4 h-14 border-b border-border/50 bg-card safe-top">
+        <div className="flex items-center gap-2">
           {showBack ? (
             <button
               onClick={() => navigate(-1)}
-              className="p-1.5 -ml-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors min-h-11 min-w-11"
+              className="p-2 -ml-2 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
               aria-label="Go back"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
           ) : null}
-          <h1 className="text-base font-semibold text-foreground">{getTitle()}</h1>
+          <h1 className="text-base font-bold text-foreground tracking-tight">{getTitle()}</h1>
         </div>
 
         {/* Notification Bell */}
@@ -222,8 +222,8 @@ export function AppShell() {
 
       {/* Fixed Bottom Navigation - Only show on main tabs */}
       {isMainTab && (
-        <nav className="flex-shrink-0 border-t border-border/60 bg-card safe-bottom">
-          <div className="flex items-center justify-around h-16">
+        <nav className="flex-shrink-0 border-t border-border/50 bg-card safe-bottom">
+          <div className="flex items-center justify-around h-[4.5rem]">
             {tabs.map((tab) => {
               const Icon = tab.icon
               const isActive = location.pathname === tab.path
@@ -243,10 +243,10 @@ export function AppShell() {
                   {isActive && (
                     <span className="absolute top-2 w-6 h-0.5 rounded-full bg-primary" />
                   )}
-                  <Icon className={cn('w-5 h-5', isActive && 'text-primary')} />
+                  <Icon className={cn('w-6 h-6', isActive && 'text-primary')} />
                   <span
                     className={cn(
-                      'text-[10px] font-medium mt-0.5',
+                      'text-[11px] font-medium mt-0.5',
                       isActive ? 'text-foreground' : 'text-muted-foreground'
                     )}
                   >

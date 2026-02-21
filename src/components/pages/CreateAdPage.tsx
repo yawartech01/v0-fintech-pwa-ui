@@ -270,7 +270,7 @@ export function CreateAdPage() {
               {bankAccounts.length === 0 ? (
                 <div className="p-4 bg-muted rounded-lg text-center">
                   <p className="text-sm text-muted-foreground mb-3">No bank accounts found</p>
-                  <Button type="button" onClick={() => navigate('/bank-accounts')} variant="outline" size="sm">
+                  <Button type="button" onClick={() => navigate('/bank-accounts')} variant="outline">
                     Add Bank Account
                   </Button>
                 </div>
@@ -293,7 +293,7 @@ export function CreateAdPage() {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full"
+              className="w-full text-base"
               size="lg"
               disabled={bankAccounts.length === 0 || loading || !usdtAmount || lockAmount < 10 || insufficientBalance}
             >

@@ -81,7 +81,7 @@ export function ForgotPasswordPage() {
         {/* Back Button */}
         <button
           onClick={() => (step === 'enter_email' ? navigate('/login') : setStep('enter_email'))}
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors py-2 px-1"
         >
           <ArrowLeft className="w-4 h-4" />
           Back
@@ -163,9 +163,9 @@ export function ForgotPasswordPage() {
                   type="button"
                   onClick={handleResendCode}
                   disabled={loading}
-                  className="text-sm text-primary hover:underline disabled:opacity-50"
+                  className="block w-full py-3 text-sm text-primary hover:underline disabled:opacity-50"
                 >
-                  Didn't receive code? Resend
+                  {"Didn't receive code? Resend"}
                 </button>
               </div>
             </form>

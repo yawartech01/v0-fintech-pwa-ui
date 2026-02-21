@@ -18,17 +18,17 @@ export function AboutPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2 text-sm">
-            <div className="flex justify-between p-3 bg-secondary/30 rounded-lg">
+            <div className="flex justify-between items-center px-4 py-3 bg-secondary/30 rounded-lg border border-border/30">
               <span className="text-muted-foreground">Version</span>
-              <span className="font-mono">{appVersion}</span>
+              <span className="font-mono font-medium">{appVersion}</span>
             </div>
-            <div className="flex justify-between p-3 bg-secondary/30 rounded-lg">
+            <div className="flex justify-between items-center px-4 py-3 bg-secondary/30 rounded-lg border border-border/30">
               <span className="text-muted-foreground">Build Date</span>
-              <span>{buildDate}</span>
+              <span className="font-medium">{buildDate}</span>
             </div>
-            <div className="flex justify-between p-3 bg-secondary/30 rounded-lg">
+            <div className="flex justify-between items-center px-4 py-3 bg-secondary/30 rounded-lg border border-border/30">
               <span className="text-muted-foreground">Network</span>
-              <span>TRC20 Only</span>
+              <span className="font-medium">TRC20 Only</span>
             </div>
           </div>
         </CardContent>
@@ -75,16 +75,16 @@ export function AboutPage() {
           <CardTitle className="text-base">Legal & Privacy</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
-          <button className="w-full flex items-center justify-between p-3 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors text-left">
-            <span className="text-sm">Terms of Service</span>
+          <button className="w-full flex items-center justify-between px-4 py-3.5 bg-secondary/30 rounded-lg hover:bg-secondary/50 active:bg-secondary/60 transition-colors text-left border border-border/30">
+            <span className="text-sm font-medium">Terms of Service</span>
             <ExternalLink className="w-4 h-4 text-muted-foreground" />
           </button>
-          <button className="w-full flex items-center justify-between p-3 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors text-left">
-            <span className="text-sm">Privacy Policy</span>
+          <button className="w-full flex items-center justify-between px-4 py-3.5 bg-secondary/30 rounded-lg hover:bg-secondary/50 active:bg-secondary/60 transition-colors text-left border border-border/30">
+            <span className="text-sm font-medium">Privacy Policy</span>
             <ExternalLink className="w-4 h-4 text-muted-foreground" />
           </button>
-          <button className="w-full flex items-center justify-between p-3 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors text-left">
-            <span className="text-sm">Cookie Policy</span>
+          <button className="w-full flex items-center justify-between px-4 py-3.5 bg-secondary/30 rounded-lg hover:bg-secondary/50 active:bg-secondary/60 transition-colors text-left border border-border/30">
+            <span className="text-sm font-medium">Cookie Policy</span>
             <ExternalLink className="w-4 h-4 text-muted-foreground" />
           </button>
         </CardContent>

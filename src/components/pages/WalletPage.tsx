@@ -384,7 +384,7 @@ export function WalletPage() {
   return (
     <div className="space-y-4 pb-4">
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-border overflow-x-auto">
+      <div className="flex border-b border-border/60 bg-card rounded-t-xl overflow-hidden -mx-4 px-0">
         {[
           { id: 'overview' as const, label: 'Overview' },
           { id: 'deposit' as const, label: 'Deposit' },
@@ -394,7 +394,7 @@ export function WalletPage() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+            className={`flex-1 px-3 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === tab.id
                 ? 'border-primary text-primary'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -408,39 +408,35 @@ export function WalletPage() {
       {/* Overview Tab */}
       {activeTab === 'overview' && (
         <div className="space-y-4">
-          {/* Balance Cards */}
-          <div className="grid grid-cols-3 gap-2">
-            <Card>
-              <CardContent className="p-4">
-                <p className="text-xs text-muted-foreground mb-1">Available</p>
-                <p className="text-lg font-bold">{formatNumber(balances.available)}</p>
-                <p className="text-xs text-muted-foreground">USDT</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <p className="text-xs text-muted-foreground mb-1">Locked</p>
-                <p className="text-lg font-bold">{formatNumber(balances.locked)}</p>
-                <p className="text-xs text-muted-foreground">USDT</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <p className="text-xs text-muted-foreground mb-1">Total</p>
-                <p className="text-lg font-bold">{formatNumber(balances.total)}</p>
-                <p className="text-xs text-muted-foreground">USDT</p>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Balance Card */}
+          <Card>
+            <CardContent className="p-5">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">USDT Balance</p>
+              <p className="text-4xl font-bold tracking-tight">
+                {formatNumber(balances.total)}
+                <span className="text-lg font-medium text-muted-foreground ml-2">USDT</span>
+              </p>
+              <div className="border-t border-border/50 mt-4 pt-4 flex">
+                <div className="flex-1">
+                  <p className="text-xs text-muted-foreground mb-0.5">Available</p>
+                  <p className="text-base font-bold">{formatNumber(balances.available)} <span className="text-xs font-medium text-muted-foreground">USDT</span></p>
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-muted-foreground mb-0.5">Locked in Ads</p>
+                  <p className="text-base font-bold">{formatNumber(balances.locked)} <span className="text-xs font-medium text-muted-foreground">USDT</span></p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-2 gap-2">
-            <Button onClick={() => setActiveTab('deposit')} className="w-full">
-              <ArrowDownCircle className="w-4 h-4 mr-2" />
+          <div className="grid grid-cols-2 gap-3">
+            <Button onClick={() => setActiveTab('deposit')} className="w-full" size="lg">
+              <ArrowDownCircle className="w-5 h-5 mr-2" />
               Deposit
             </Button>
-            <Button onClick={() => setActiveTab('withdraw')} variant="outline" className="w-full">
-              <ArrowUpCircle className="w-4 h-4 mr-2" />
+            <Button onClick={() => setActiveTab('withdraw')} variant="outline" className="w-full" size="lg">
+              <ArrowUpCircle className="w-5 h-5 mr-2" />
               Withdraw
             </Button>
           </div>
@@ -660,7 +656,6 @@ export function WalletPage() {
               {depositStatus === 'confirmed' && (
                 <Button
                   variant="outline"
-                  size="sm"
                   className="w-full"
                   onClick={() => {
                     setTxHashInput('')
@@ -828,15 +823,16 @@ export function WalletPage() {
                   </p>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <Button
                     onClick={() => setWithdrawStep('form')}
                     variant="outline"
                     className="flex-1"
+                    size="lg"
                   >
                     Back
                   </Button>
-                  <Button onClick={handleWithdrawConfirm} className="flex-1">
+                  <Button onClick={handleWithdrawConfirm} className="flex-1" size="lg">
                     Confirm Withdrawal
                   </Button>
                 </div>
@@ -863,7 +859,7 @@ export function WalletPage() {
                   <button
                     key={filter.id}
                     onClick={() => setHistoryFilter(filter.id)}
-                    className={`px-3 py-1 text-sm rounded-full whitespace-nowrap transition-colors ${
+                    className={`px-4 py-2 text-sm rounded-full whitespace-nowrap transition-colors ${
                       historyFilter === filter.id
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-muted text-muted-foreground hover:bg-muted/80'

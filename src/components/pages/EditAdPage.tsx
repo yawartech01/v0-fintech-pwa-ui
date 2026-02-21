@@ -186,7 +186,6 @@ export function EditAdPage() {
                     type="button"
                     onClick={() => navigate('/bank-accounts')}
                     variant="outline"
-                    size="sm"
                   >
                     Add Bank Account
                   </Button>
