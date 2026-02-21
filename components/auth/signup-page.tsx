@@ -92,10 +92,10 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
 
       {/* Main Content */}
       <div className="flex-1 px-6 pt-4 overflow-y-auto">
-        <h1 className="text-2xl font-bold text-foreground mb-2">
+        <h1 className="text-xl font-semibold text-foreground mb-1">
           Create account
         </h1>
-        <p className="text-muted-foreground mb-8">
+        <p className="text-sm text-muted-foreground mb-8">
           Start exchanging USDT in minutes
         </p>
 
@@ -105,14 +105,14 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
             <div className="flex items-center justify-between">
               <Label
                 htmlFor="emailOrPhone"
-                className="text-sm font-medium text-foreground"
+                className="text-xs font-medium text-muted-foreground"
               >
                 {inputType === "email" ? "Email" : "Phone Number"}
               </Label>
               <button
                 type="button"
                 onClick={toggleInputType}
-                className="text-sm text-primary hover:underline"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
                 {inputType === "email" ? "Use phone instead" : "Use email instead"}
               </button>
@@ -127,11 +127,11 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
               }
               value={emailOrPhone}
               onChange={(e) => setEmailOrPhone(e.target.value)}
-              className="h-12 bg-secondary border-border text-foreground placeholder:text-muted-foreground"
+              className="h-12 bg-card border-border/60 text-foreground placeholder:text-muted-foreground rounded-xl focus:border-primary/50"
               autoComplete={inputType === "email" ? "email" : "tel"}
             />
             {errors.emailOrPhone && (
-              <p className="text-sm text-destructive">{errors.emailOrPhone}</p>
+              <p className="text-xs text-destructive">{errors.emailOrPhone}</p>
             )}
           </div>
 
@@ -139,7 +139,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
           <div className="space-y-2">
             <Label
               htmlFor="password"
-              className="text-sm font-medium text-foreground"
+              className="text-xs font-medium text-muted-foreground"
             >
               Password
             </Label>
@@ -150,7 +150,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                 placeholder="Create a password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="h-12 bg-secondary border-border text-foreground placeholder:text-muted-foreground pr-12"
+                className="h-12 bg-card border-border/60 text-foreground placeholder:text-muted-foreground pr-12 rounded-xl focus:border-primary/50"
                 autoComplete="new-password"
               />
               <button
@@ -167,7 +167,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
               </button>
             </div>
             {errors.password && (
-              <p className="text-sm text-destructive">{errors.password}</p>
+              <p className="text-xs text-destructive">{errors.password}</p>
             )}
             <p className="text-xs text-muted-foreground">
               Must be at least 8 characters
@@ -187,33 +187,33 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
               />
               <label
                 htmlFor="terms"
-                className="text-sm text-muted-foreground leading-relaxed cursor-pointer"
+                className="text-xs text-muted-foreground leading-relaxed cursor-pointer"
               >
                 I agree to the{" "}
                 <button
                   type="button"
-                  className="text-primary hover:underline"
+                  className="text-foreground hover:text-primary transition-colors"
                 >
                   Terms of Service
                 </button>{" "}
                 and{" "}
                 <button
                   type="button"
-                  className="text-primary hover:underline"
+                  className="text-foreground hover:text-primary transition-colors"
                 >
                   Privacy Policy
                 </button>
               </label>
             </div>
             {errors.terms && (
-              <p className="text-sm text-destructive">{errors.terms}</p>
+              <p className="text-xs text-destructive">{errors.terms}</p>
             )}
           </div>
 
           {/* Submit Button */}
           <Button
             type="submit"
-            className="w-full h-12 text-base font-semibold"
+            className="w-full h-12 text-sm font-medium rounded-xl"
             disabled={!isFormValid || isLoading}
           >
             {isLoading ? "Creating account..." : "Create account"}
@@ -222,12 +222,12 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
       </div>
 
       {/* Bottom Link */}
-      <div className="flex-shrink-0 px-6 pb-8 pt-4">
-        <p className="text-center text-sm text-muted-foreground">
+      <div className="flex-shrink-0 px-6 pb-10 pt-4">
+        <p className="text-center text-xs text-muted-foreground">
           {"Already have an account? "}
           <button
             onClick={() => onNavigate("login")}
-            className="text-primary font-medium hover:underline"
+            className="text-foreground font-medium hover:text-primary transition-colors"
           >
             Log in
           </button>

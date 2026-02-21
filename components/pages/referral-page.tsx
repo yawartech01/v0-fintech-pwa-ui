@@ -81,27 +81,27 @@ export function ReferralPage() {
     <div className="space-y-4">
       {/* Stats Cards */}
       <div className="grid grid-cols-2 gap-3">
-        <Card className="bg-card border-border">
+        <Card className="bg-card border-border/60">
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-primary">
+            <p className="text-xl font-semibold text-primary">
               {referralData.totalEarned}
             </p>
-            <p className="text-xs text-muted-foreground">INR Earned</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">INR Earned</p>
           </CardContent>
         </Card>
-        <Card className="bg-card border-border">
+        <Card className="bg-card border-border/60">
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-foreground">
+            <p className="text-xl font-semibold text-foreground">
               {referralData.referralCount}
             </p>
-            <p className="text-xs text-muted-foreground">Referrals</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wide mt-0.5">Referrals</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Pending Rewards */}
       {referralData.pendingRewards > 0 && (
-        <Card className="bg-warning/5 border-warning/20">
+        <Card className="bg-warning/5 border-warning/15">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -119,14 +119,14 @@ export function ReferralPage() {
       )}
 
       {/* Referral Code */}
-      <Card className="bg-card border-border">
+      <Card className="bg-card border-border/60">
         <CardContent className="p-4 space-y-4">
           <div>
             <p className="text-xs text-muted-foreground mb-2">
               Your Referral Code
             </p>
             <div className="flex items-center gap-2">
-              <code className="flex-1 text-lg font-bold text-foreground bg-secondary px-4 py-3 rounded-lg text-center font-mono tracking-wider">
+              <code className="flex-1 text-base font-semibold text-foreground bg-secondary/50 px-4 py-3 rounded-xl text-center font-mono tracking-wider">
                 {referralData.code}
               </code>
               <Button
@@ -147,7 +147,7 @@ export function ReferralPage() {
           <div>
             <p className="text-xs text-muted-foreground mb-2">Referral Link</p>
             <div className="flex items-center gap-2">
-              <code className="flex-1 text-sm text-foreground bg-secondary px-3 py-2.5 rounded-lg truncate font-mono">
+              <code className="flex-1 text-xs text-foreground bg-secondary/50 px-3 py-2.5 rounded-lg truncate font-mono">
                 {referralData.link}
               </code>
               <Button
@@ -170,16 +170,16 @@ export function ReferralPage() {
       {/* Share Button */}
       <Button
         onClick={handleShare}
-        className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
+        className="w-full h-12 text-sm font-medium rounded-xl"
       >
-        <Share2 className="w-5 h-5 mr-2" />
+        <Share2 className="w-4 h-4 mr-2" />
         Share with Friends
       </Button>
 
       {/* How it Works */}
-      <Card className="bg-card border-border">
+      <Card className="bg-card border-border/60">
         <CardContent className="p-4">
-          <p className="text-sm font-medium text-foreground mb-3">
+          <p className="text-xs font-medium text-foreground mb-3 uppercase tracking-wide">
             How it Works
           </p>
           <div className="space-y-3">
@@ -187,7 +187,7 @@ export function ReferralPage() {
               <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                 <span className="text-xs font-bold text-primary">1</span>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 Share your referral code with friends
               </p>
             </div>
@@ -195,7 +195,7 @@ export function ReferralPage() {
               <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                 <span className="text-xs font-bold text-primary">2</span>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 They sign up and complete their first trade
               </p>
             </div>
@@ -203,7 +203,7 @@ export function ReferralPage() {
               <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                 <span className="text-xs font-bold text-primary">3</span>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 You both earn rewards - 250 INR each!
               </p>
             </div>
@@ -213,11 +213,11 @@ export function ReferralPage() {
 
       {/* Rewards History */}
       <div className="space-y-3">
-        <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
           Rewards History
         </h2>
-        <Card className="bg-card border-border">
-          <CardContent className="p-0 divide-y divide-border">
+        <Card className="bg-card border-border/60">
+          <CardContent className="p-0 divide-y divide-border/60">
             {rewardsHistory.map((reward) => (
               <div
                 key={reward.id}

@@ -130,10 +130,10 @@ export function VerifyPage({ onNavigate, contact = "user@example.com" }: VerifyP
 
       {/* Main Content */}
       <div className="flex-1 px-6 pt-4">
-        <h1 className="text-2xl font-bold text-foreground mb-2">
+        <h1 className="text-xl font-semibold text-foreground mb-1">
           Verify your account
         </h1>
-        <p className="text-muted-foreground mb-8">
+        <p className="text-sm text-muted-foreground mb-8">
           We sent a 6-digit code to{" "}
           <span className="text-foreground font-medium">{maskedContact}</span>
         </p>
@@ -155,7 +155,7 @@ export function VerifyPage({ onNavigate, contact = "user@example.com" }: VerifyP
                   onChange={(e) => handleChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   onPaste={index === 0 ? handlePaste : undefined}
-                  className="w-12 h-14 text-center text-xl font-semibold bg-secondary border-border text-foreground focus:border-primary focus:ring-primary"
+                  className="w-12 h-14 text-center text-xl font-semibold bg-card border-border/60 text-foreground rounded-xl focus:border-primary/50 focus:ring-primary/30"
                   aria-label={`Digit ${index + 1}`}
                 />
               ))}
@@ -188,7 +188,7 @@ export function VerifyPage({ onNavigate, contact = "user@example.com" }: VerifyP
           {/* Submit Button */}
           <Button
             type="submit"
-            className="w-full h-12 text-base font-semibold"
+            className="w-full h-12 text-sm font-medium rounded-xl"
             disabled={!isOtpComplete || isLoading}
           >
             {isLoading ? "Verifying..." : "Verify"}

@@ -54,7 +54,7 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Amount */}
       <div className="space-y-2">
-        <Label htmlFor="amount" className="text-foreground">
+        <Label htmlFor="amount" className="text-xs font-medium text-muted-foreground">
           Amount to Sell (USDT)
         </Label>
         <Input
@@ -63,7 +63,7 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
           placeholder="0.00"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="bg-card border-border text-foreground placeholder:text-muted-foreground text-lg h-12"
+          className="bg-card border-border/60 text-foreground placeholder:text-muted-foreground text-lg h-12 rounded-xl focus:border-primary/50"
         />
         <p className="text-xs text-muted-foreground">
           Available balance: 5,000 USDT
@@ -72,7 +72,7 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
 
       {/* Order Limits */}
       <div className="space-y-2">
-        <Label className="text-foreground">Order Limits (USDT)</Label>
+        <Label className="text-xs font-medium text-muted-foreground">Order Limits (USDT)</Label>
         <div className="grid grid-cols-2 gap-3">
           <div>
             <Input
@@ -80,7 +80,7 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
               placeholder="Min"
               value={minOrder}
               onChange={(e) => setMinOrder(e.target.value)}
-              className="bg-card border-border text-foreground placeholder:text-muted-foreground"
+              className="bg-card border-border/60 text-foreground placeholder:text-muted-foreground rounded-xl focus:border-primary/50"
             />
           </div>
           <div>
@@ -89,7 +89,7 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
               placeholder="Max"
               value={maxOrder}
               onChange={(e) => setMaxOrder(e.target.value)}
-              className="bg-card border-border text-foreground placeholder:text-muted-foreground"
+              className="bg-card border-border/60 text-foreground placeholder:text-muted-foreground rounded-xl focus:border-primary/50"
             />
           </div>
         </div>
@@ -100,12 +100,12 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
 
       {/* Bank Account */}
       <div className="space-y-2">
-        <Label className="text-foreground">Receiving Bank Account</Label>
+        <Label className="text-xs font-medium text-muted-foreground">Receiving Bank Account</Label>
         <Select value={selectedBank} onValueChange={setSelectedBank}>
-          <SelectTrigger className="bg-card border-border text-foreground h-12">
+          <SelectTrigger className="bg-card border-border/60 text-foreground h-12 rounded-xl">
             <SelectValue placeholder="Select bank account" />
           </SelectTrigger>
-          <SelectContent className="bg-card border-border">
+          <SelectContent className="bg-card border-border/60">
             {bankAccounts.map((bank) => (
               <SelectItem
                 key={bank.id}
@@ -119,7 +119,7 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
         </Select>
         <button
           type="button"
-          className="text-xs text-primary hover:underline"
+          className="text-xs text-muted-foreground hover:text-foreground transition-colors"
         >
           + Add new bank account
         </button>
@@ -127,7 +127,7 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
 
       {/* Notes */}
       <div className="space-y-2">
-        <Label htmlFor="notes" className="text-foreground">
+        <Label htmlFor="notes" className="text-xs font-medium text-muted-foreground">
           Notes for Buyers (Optional)
         </Label>
         <Textarea
@@ -135,12 +135,12 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
           placeholder="Add any additional instructions or terms..."
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          className="bg-card border-border text-foreground placeholder:text-muted-foreground min-h-[100px]"
+          className="bg-card border-border/60 text-foreground placeholder:text-muted-foreground min-h-[100px] rounded-xl focus:border-primary/50"
         />
       </div>
 
       {/* Active Toggle */}
-      <Card className="bg-card border-border">
+      <Card className="bg-card border-border/60">
         <CardContent className="p-4">
           <div className="flex items-center justify-between">
             <div>
@@ -160,11 +160,11 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
       </Card>
 
       {/* Info Box */}
-      <Card className="bg-primary/5 border-primary/20">
-        <CardContent className="p-4">
+      <Card className="bg-primary/5 border-primary/15">
+        <CardContent className="p-3.5">
           <div className="flex gap-3">
-            <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-            <div className="text-sm text-muted-foreground">
+            <Info className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+            <div className="text-xs text-muted-foreground leading-relaxed">
               <p>
                 Your USDT will be locked until the ad is completed or cancelled.
                 Payouts are sent to your selected bank account within 24 hours
@@ -178,7 +178,7 @@ export function CreateAdPage({ onBack }: CreateAdPageProps) {
       {/* Submit Button */}
       <Button
         type="submit"
-        className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
+        className="w-full h-12 text-sm font-medium rounded-xl"
       >
         Create Sell Ad
       </Button>
