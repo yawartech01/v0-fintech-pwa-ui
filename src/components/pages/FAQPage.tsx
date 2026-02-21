@@ -58,7 +58,7 @@ export function FAQPage() {
   }
 
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
       {/* Header */}
       <Card>
         <CardHeader>
@@ -75,10 +75,10 @@ export function FAQPage() {
           <Card key={index} className="overflow-hidden">
             <button
               onClick={() => toggleAccordion(index)}
-              className="w-full text-left px-4 py-4 hover:bg-secondary/50 transition-colors"
+              className="w-full text-left px-4 py-3 hover:bg-secondary/50 transition-colors"
             >
               <div className="flex items-center justify-between">
-                <p className="font-medium text-[15px] pr-4 leading-snug">{faq.question}</p>
+                <p className="font-medium text-sm pr-3 leading-snug">{faq.question}</p>
                 <ChevronDown
                   className={`w-5 h-5 text-muted-foreground transition-transform flex-shrink-0 ${
                     openIndex === index ? 'rotate-180' : ''

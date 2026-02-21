@@ -190,7 +190,7 @@ export function AdminPage() {
   }
 
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
       {/* Header */}
       <Card className="border-warning/30">
         <CardHeader>

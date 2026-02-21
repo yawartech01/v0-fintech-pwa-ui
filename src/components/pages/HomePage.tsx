@@ -155,27 +155,23 @@ export function HomePage() {
       {/* USDT Rate Card */}
       <Card className="bg-gradient-to-br from-primary/20 to-primary/5 border-primary/20 overflow-hidden relative">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent" />
-        <CardContent className="p-6 relative z-10">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h2 className="text-sm font-medium text-muted-foreground">Today's USDT Rate</h2>
-              {rate && (
-                <p className="text-xs text-muted-foreground">
-                  {RateService.getLastUpdatedText(rate.lastUpdated)}
-                </p>
-              )}
-            </div>
-            <div className="flex items-end justify-between">
-              <div>
-                <div className="text-3xl font-bold text-foreground">
-                  {rate ? `₹${formatNumber(rate.rate)}` : '—'}
-                </div>
-                <div className="flex items-center gap-2 mt-2">
-                  <span className="text-xs text-muted-foreground">per USDT (fixed by company)</span>
-                </div>
+        <CardContent className="p-4 relative z-10">
+          <div className="flex items-center justify-between mb-1">
+            <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Today's USDT Rate</h2>
+            {rate && (
+              <p className="text-[11px] text-muted-foreground">
+                {RateService.getLastUpdatedText(rate.lastUpdated)}
+              </p>
+            )}
+          </div>
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-2xl font-bold text-foreground leading-tight">
+                {rate ? `₹${formatNumber(rate.rate)}` : '—'}
               </div>
-              <TrendingUp className="w-8 h-8 text-primary" />
+              <span className="text-[11px] text-muted-foreground mt-0.5 block">per USDT (fixed by company)</span>
             </div>
+            <TrendingUp className="w-6 h-6 text-primary" />
           </div>
         </CardContent>
       </Card>
@@ -211,33 +207,33 @@ export function HomePage() {
 
       {/* Quick Actions */}
       <div className="px-4">
-        <h2 className="text-base font-semibold mb-3">Quick Actions</h2>
-        <div className="grid grid-cols-3 gap-3">
+        <h2 className="text-sm font-semibold mb-2.5">Quick Actions</h2>
+        <div className="grid grid-cols-3 gap-2.5">
           <Card
             className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all rounded-xl border-x"
             onClick={() => navigate('/sell-ads/create')}
           >
-            <CardContent className="p-5 text-center">
-              <Plus className="w-7 h-7 mx-auto mb-2 text-primary" />
-              <p className="text-sm font-medium text-foreground">Create Ad</p>
+            <CardContent className="p-3.5 text-center">
+              <Plus className="w-6 h-6 mx-auto mb-1.5 text-primary" />
+              <p className="text-xs font-medium text-foreground">Create Ad</p>
             </CardContent>
           </Card>
           <Card
             className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all rounded-xl border-x"
             onClick={() => navigate('/wallet?tab=deposit')}
           >
-            <CardContent className="p-5 text-center">
-              <ArrowDownCircle className="w-7 h-7 mx-auto mb-2 text-primary" />
-              <p className="text-sm font-medium text-foreground">Deposit</p>
+            <CardContent className="p-3.5 text-center">
+              <ArrowDownCircle className="w-6 h-6 mx-auto mb-1.5 text-primary" />
+              <p className="text-xs font-medium text-foreground">Deposit</p>
             </CardContent>
           </Card>
           <Card
             className="cursor-pointer hover:bg-secondary/50 active:bg-primary/20 active:scale-95 transition-all rounded-xl border-x"
             onClick={() => navigate('/wallet?tab=withdraw')}
           >
-            <CardContent className="p-5 text-center">
-              <ArrowUpCircle className="w-7 h-7 mx-auto mb-2 text-primary" />
-              <p className="text-sm font-medium text-foreground">Withdraw</p>
+            <CardContent className="p-3.5 text-center">
+              <ArrowUpCircle className="w-6 h-6 mx-auto mb-1.5 text-primary" />
+              <p className="text-xs font-medium text-foreground">Withdraw</p>
             </CardContent>
           </Card>
         </div>
@@ -245,8 +241,8 @@ export function HomePage() {
 
       {/* Recent Activity Feed */}
       <div>
-        <div className="flex items-center justify-between mb-3 px-4">
-          <h2 className="text-base font-semibold">Recent Activity</h2>
+        <div className="flex items-center justify-between mb-2.5 px-4">
+          <h2 className="text-sm font-semibold">Recent Activity</h2>
           <Button onClick={loadData} variant="ghost" size="sm">
             <RefreshCw className={`w-4 h-4 mr-1.5 ${loading ? 'animate-spin' : ''}`} />
             Refresh
@@ -278,26 +274,26 @@ export function HomePage() {
               {recentActivity.map((event, index) => (
                 <div
                   key={event.id}
-                  className={`p-4 flex items-center justify-between hover:bg-secondary/30 transition-colors ${
+                  className={`px-4 py-3 flex items-center justify-between hover:bg-secondary/30 transition-colors ${
                     index !== recentActivity.length - 1 ? 'border-b border-border/60' : ''
                   }`}
                 >
-                  <div className="flex items-center gap-3 flex-1 min-w-0">
-                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-lg flex-shrink-0">
+                  <div className="flex items-center gap-2.5 flex-1 min-w-0">
+                    <div className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-base flex-shrink-0">
                       {event.icon}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">{event.label}</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-[13px] font-medium truncate leading-tight">{event.label}</p>
+                      <p className="text-[11px] text-muted-foreground mt-0.5">
                         {ActivityService.formatRelativeTime(event.timestamp)}
                       </p>
                     </div>
                   </div>
                   <div className="text-right flex-shrink-0 ml-2">
-                    <p className="text-sm font-semibold">{formatNumber(event.amount)}</p>
+                    <p className="text-[13px] font-semibold">{formatNumber(event.amount)}</p>
                     <Badge
                       variant={ActivityService.getStatusVariant(event.status)}
-                      className="text-xs mt-1"
+                      className="text-[11px] mt-0.5"
                     >
                       {event.status}
                     </Badge>

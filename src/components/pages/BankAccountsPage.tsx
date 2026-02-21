@@ -175,7 +175,7 @@ export function BankAccountsPage() {
 
   if (showForm) {
     return (
-      <div className="space-y-4 pb-4">
+      <div className="space-y-3 pb-4">
         <Card>
           <CardHeader>
             <CardTitle className="text-base">
@@ -233,14 +233,14 @@ export function BankAccountsPage() {
   }
 
   return (
-    <div className="space-y-4 pb-4">
-      <div className="flex items-center justify-between">
+    <div className="space-y-3 pb-4">
+      <div className="flex items-center justify-between px-4">
         <div>
-          <h1 className="text-xl font-bold">Bank Accounts</h1>
-          <p className="text-sm text-muted-foreground">Manage your payment methods</p>
+          <h1 className="text-base font-bold">Bank Accounts</h1>
+          <p className="text-xs text-muted-foreground">Manage your payment methods</p>
         </div>
-        <Button onClick={() => setShowForm(true)}>
-          <Plus className="w-4 h-4 mr-2" />Add
+        <Button onClick={() => setShowForm(true)} size="sm">
+          <Plus className="w-4 h-4 mr-1.5" />Add
         </Button>
       </div>
 
@@ -284,15 +284,15 @@ export function BankAccountsPage() {
                 </div>
                 <div className="flex gap-2 pt-1">
                   {!account.isDefault && useAPI && (
-                    <Button onClick={() => handleSetDefault(account.id)} variant="outline" className="flex-1">
-                      <Check className="w-4 h-4 mr-2" />Set Default
+                    <Button onClick={() => handleSetDefault(account.id)} variant="outline" size="sm" className="flex-1 text-xs">
+                      <Check className="w-3.5 h-3.5 mr-1" />Default
                     </Button>
                   )}
-                  <Button onClick={() => handleEdit(account)} variant="outline" className="flex-1">
-                    <Edit2 className="w-4 h-4 mr-2" />Edit
+                  <Button onClick={() => handleEdit(account)} variant="outline" size="sm" className="flex-1 text-xs">
+                    <Edit2 className="w-3.5 h-3.5 mr-1" />Edit
                   </Button>
-                  <Button onClick={() => setShowDeleteConfirm(account.id)} variant="destructive" className="flex-1">
-                    <Trash2 className="w-4 h-4 mr-2" />Delete
+                  <Button onClick={() => setShowDeleteConfirm(account.id)} variant="destructive" size="sm" className="flex-1 text-xs">
+                    <Trash2 className="w-3.5 h-3.5 mr-1" />Delete
                   </Button>
                 </div>
               </CardContent>

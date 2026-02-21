@@ -164,13 +164,13 @@ export function CreateAdPage() {
   }
 
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
       {/* Header */}
-      <div className="flex items-center gap-3">
-        <Button onClick={() => navigate('/sell-ads')} variant="ghost" size="icon">
+      <div className="flex items-center gap-2.5 px-4">
+        <Button onClick={() => navigate('/sell-ads')} variant="ghost" size="icon-sm">
           <ArrowLeft className="w-5 h-5" />
         </Button>
-        <h1 className="text-xl font-bold">Create Sell Ad</h1>
+        <h1 className="text-base font-bold">Create Sell Ad</h1>
       </div>
 
       {/* Today's Rate Card */}
