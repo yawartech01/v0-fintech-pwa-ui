@@ -3,10 +3,10 @@ import { Card, CardContent } from '@/components/ui/card'
 
 export function ReferralPage() {
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
 
       {/* Coming Soon Banner */}
-      <div className="flex items-start gap-3 p-4 rounded-xl bg-yellow-500/10 border border-yellow-500/20">
+      <div className="flex items-start gap-3 p-4 bg-yellow-500/10 border-y border-yellow-500/20">
         <Clock className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
         <div>
           <p className="text-sm font-semibold text-yellow-600 dark:text-yellow-400">
@@ -20,11 +20,11 @@ export function ReferralPage() {
 
       {/* Header */}
       <Card className="bg-primary/5 border-primary/20">
-        <CardContent className="p-6 text-center space-y-3">
-          <Gift className="w-14 h-14 mx-auto text-primary" />
+        <CardContent className="p-4 text-center space-y-2">
+          <Gift className="w-10 h-10 mx-auto text-primary" />
           <div>
-            <h1 className="text-xl font-bold">Invite & Earn</h1>
-            <p className="text-sm text-muted-foreground mt-1">
+            <h1 className="text-base font-bold">Invite & Earn</h1>
+            <p className="text-xs text-muted-foreground mt-0.5">
               Earn rewards every time your referrals sell USDT on Veltox
             </p>
           </div>
@@ -33,8 +33,8 @@ export function ReferralPage() {
 
       {/* How it works */}
       <Card>
-        <CardContent className="p-5 space-y-4">
-          <h2 className="text-base font-semibold flex items-center gap-2">
+        <CardContent className="p-4 space-y-3">
+          <h2 className="text-sm font-semibold flex items-center gap-2">
             <Info className="w-4 h-4 text-primary" />
             How It Works
           </h2>
@@ -75,8 +75,8 @@ export function ReferralPage() {
 
       {/* Reward Rate */}
       <Card className="bg-primary/5 border-primary/20">
-        <CardContent className="p-5 space-y-3">
-          <h2 className="text-base font-semibold flex items-center gap-2">
+        <CardContent className="p-4 space-y-2.5">
+          <h2 className="text-sm font-semibold flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-primary" />
             Reward Rate
           </h2>
@@ -105,19 +105,19 @@ export function ReferralPage() {
       </Card>
 
       {/* Stats placeholder */}
-      <div className="grid grid-cols-2 gap-3">
-        <Card className="bg-secondary/40">
-          <CardContent className="p-4 text-center">
-            <p className="text-xs text-muted-foreground mb-1">Total Referrals</p>
-            <p className="text-2xl font-bold">—</p>
-            <p className="text-xs text-muted-foreground">Coming soon</p>
+      <div className="grid grid-cols-2 gap-2.5 px-4">
+        <Card className="bg-secondary/40 rounded-xl border-x">
+          <CardContent className="p-3.5 text-center">
+            <p className="text-[11px] text-muted-foreground mb-0.5">Total Referrals</p>
+            <p className="text-xl font-bold">—</p>
+            <p className="text-[11px] text-muted-foreground">Coming soon</p>
           </CardContent>
         </Card>
-        <Card className="bg-secondary/40">
-          <CardContent className="p-4 text-center">
-            <p className="text-xs text-muted-foreground mb-1">Total Earned</p>
-            <p className="text-2xl font-bold">—</p>
-            <p className="text-xs text-muted-foreground">Coming soon</p>
+        <Card className="bg-secondary/40 rounded-xl border-x">
+          <CardContent className="p-3.5 text-center">
+            <p className="text-[11px] text-muted-foreground mb-0.5">Total Earned</p>
+            <p className="text-xl font-bold">—</p>
+            <p className="text-[11px] text-muted-foreground">Coming soon</p>
           </CardContent>
         </Card>
       </div>

@@ -6,15 +6,15 @@ export function AboutPage() {
   const buildDate = 'February 2026'
 
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
       {/* App Info */}
       <Card>
         <CardHeader className="text-center">
-          <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-2">
-            <Info className="w-8 h-8 text-primary" />
+          <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-1.5">
+            <Info className="w-6 h-6 text-primary" />
           </div>
-          <CardTitle className="text-2xl">VELTOX</CardTitle>
-          <p className="text-sm text-muted-foreground">Premium USDT to INR Exchange Platform</p>
+          <CardTitle className="text-lg">VELTOX</CardTitle>
+          <p className="text-xs text-muted-foreground">Premium USDT to INR Exchange Platform</p>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2 text-sm">

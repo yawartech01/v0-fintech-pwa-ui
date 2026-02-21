@@ -58,7 +58,7 @@ export function SecurityPage() {
   const lastActive = new Date().toLocaleString()
 
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
       {/* Change Password */}
       <Card>
         <CardHeader>

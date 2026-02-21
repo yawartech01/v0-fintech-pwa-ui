@@ -57,31 +57,31 @@ function AdDetailSheet({
         </div>
 
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-border">
+        <div className="flex items-center justify-between px-4 py-2.5 border-b border-border">
           <div>
-            <h2 className="text-lg font-bold">Ad Details</h2>
+            <h2 className="text-base font-bold">Ad Details</h2>
             {ad.adCode && (
               <button
                 onClick={copyAdCode}
-                className="flex items-center gap-1.5 text-sm text-primary hover:text-primary/80 transition-colors mt-0.5"
+                className="flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 transition-colors mt-0.5"
               >
                 <span className="font-mono font-semibold">{ad.adCode}</span>
-                {copied ? <CheckCheck className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <CheckCheck className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
               </button>
             )}
           </div>
-          <Button onClick={onClose} variant="ghost" size="icon" className="shrink-0">
+          <Button onClick={onClose} variant="ghost" size="icon-sm" className="shrink-0">
             <X className="w-5 h-5" />
           </Button>
         </div>
 
-        <div className="px-5 py-4 space-y-4">
+        <div className="px-4 py-3.5 space-y-3.5">
 
           {/* Status + Amount */}
           <div className="text-center py-3 rounded-xl bg-secondary/40">
-            <p className="text-3xl font-bold">{formatNumber(ad.amountTotalUsdt)} USDT</p>
-            <p className="text-muted-foreground text-lg mt-1">≈ ₹{formatNumber(inrAmount)}</p>
-            <p className="text-xs text-muted-foreground mt-0.5">@ ₹{formatNumber(todayRate)} per USDT</p>
+            <p className="text-2xl font-bold">{formatNumber(ad.amountTotalUsdt)} USDT</p>
+            <p className="text-muted-foreground text-sm mt-0.5">≈ ₹{formatNumber(inrAmount)}</p>
+            <p className="text-[11px] text-muted-foreground mt-0.5">@ ₹{formatNumber(todayRate)} per USDT</p>
             <Badge className="mt-2" variant={isCompleted ? 'secondary' : 'default'}>
               {isCompleted ? 'Completed' : 'Processing'}
             </Badge>
@@ -143,9 +143,9 @@ function AdDetailSheet({
 
           {/* Completion & Receipt */}
           {isCompleted && (
-            <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 space-y-2">
-              <p className="text-sm font-semibold text-green-600 dark:text-green-400">
-                ✓ Payment Processed by Company
+            <div className="p-3 rounded-lg bg-secondary/40 border border-border/50 space-y-2">
+              <p className="text-sm font-medium text-muted-foreground">
+                Payment Processed
               </p>
               {ad.paymentReceipt && (
                 <Button
@@ -304,25 +304,25 @@ export function SellAdsPage() {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="flex-none border-b border-border/60 bg-card px-4 py-4">
+      <div className="flex-none border-b border-border/60 bg-card px-4 py-3">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-foreground">Sell Ads</h1>
-            <p className="text-sm text-muted-foreground mt-0.5">Manage your USDT sell listings</p>
+            <h1 className="text-base font-bold text-foreground">Sell Ads</h1>
+            <p className="text-xs text-muted-foreground mt-0.5">Manage your USDT sell listings</p>
           </div>
-          <Button onClick={() => navigate('/sell-ads/create')} className="gap-2">
+          <Button onClick={() => navigate('/sell-ads/create')} size="sm" className="gap-1.5">
             <Plus className="w-4 h-4" />
             Create Ad
           </Button>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex gap-2 mt-4">
+        <div className="flex gap-1.5 mt-3">
           {(['all', 'active', 'completed'] as const).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              className={`px-4 py-2 rounded-lg text-xs font-medium transition-colors ${
                 filter === f
                   ? 'bg-primary text-primary-foreground shadow-sm'
                   : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
@@ -335,7 +335,7 @@ export function SellAdsPage() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div className="flex-1 overflow-y-auto py-3 space-y-3">
         {filteredAds.length === 0 ? (
           <Card className="p-8 text-center">
             <p className="text-muted-foreground mb-4">
@@ -357,32 +357,32 @@ export function SellAdsPage() {
             return (
               <Card
                 key={ad.id}
-                className="p-4 cursor-pointer hover:bg-secondary/30 active:bg-secondary/40 transition-all active:scale-[0.99]"
+                className="px-4 py-3 cursor-pointer hover:bg-secondary/30 active:bg-secondary/40 transition-all active:scale-[0.99]"
                 onClick={() => setSelectedAd(ad)}
               >
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-2xl font-bold text-foreground">
+                <div className="flex items-start justify-between mb-1.5">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-base font-bold text-foreground">
                         {formatNumber(ad.amountTotalUsdt)} USDT
                       </span>
-                      <Badge variant={isCompleted ? 'secondary' : 'default'}>
+                      <Badge variant={isCompleted ? 'secondary' : 'default'} className="text-[11px]">
                         {isCompleted ? 'Completed' : 'Processing'}
                       </Badge>
                     </div>
 
-                    <p className="text-base text-muted-foreground">≈ ₹{formatNumber(inrAmount)}</p>
+                    <p className="text-sm text-muted-foreground">≈ ₹{formatNumber(inrAmount)}</p>
 
-                    <div className="flex items-center gap-3 mt-1.5">
+                    <div className="flex items-center gap-3 mt-1">
                       {ad.adCode && (
-                        <span className="text-xs font-mono text-primary font-semibold">{ad.adCode}</span>
+                        <span className="text-[11px] font-mono text-primary font-semibold">{ad.adCode}</span>
                       )}
-                      <span className="text-xs text-muted-foreground">{formatDate(ad.createdAt)}</span>
+                      <span className="text-[11px] text-muted-foreground">{formatDate(ad.createdAt)}</span>
                     </div>
                   </div>
 
                   {/* Tap to view indicator */}
-                  <div className="text-xs text-muted-foreground/60 ml-2 mt-1">›</div>
+                  <div className="text-xs text-muted-foreground/60 ml-2 mt-0.5">{'>'}</div>
                 </div>
 
                 {/* Pending Request Banner */}
@@ -397,11 +397,8 @@ export function SellAdsPage() {
 
                 {/* Completed confirmation */}
                 {isCompleted && (
-                  <div className="mt-2 p-2 rounded bg-green-500/10 border border-green-500/20">
-                    <p className="text-xs text-green-600 dark:text-green-400">
-                      ✓ Payment processed — tap to view details
-                      {ad.paymentReceipt && ' & receipt'}
-                    </p>
+                  <div className="mt-2 flex items-center gap-1.5">
+                    <span className="text-xs text-muted-foreground">Tap to view details{ad.paymentReceipt ? ' & receipt' : ''}</span>
                   </div>
                 )}
               </Card>

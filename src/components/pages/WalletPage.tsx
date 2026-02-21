@@ -382,9 +382,9 @@ export function WalletPage() {
   void (depositAddressBalance >= SWEEP_THRESHOLD) // sweep threshold check
 
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
       {/* Tabs */}
-      <div className="flex border-b border-border/60 bg-card rounded-t-xl overflow-hidden -mx-4 px-0">
+      <div className="flex border-b border-border/60 bg-card overflow-hidden">
         {[
           { id: 'overview' as const, label: 'Overview' },
           { id: 'deposit' as const, label: 'Deposit' },
@@ -394,7 +394,7 @@ export function WalletPage() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex-1 px-3 py-3.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+            className={`flex-1 px-2 py-3 text-xs font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === tab.id
                 ? 'border-primary text-primary'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -407,36 +407,36 @@ export function WalletPage() {
 
       {/* Overview Tab */}
       {activeTab === 'overview' && (
-        <div className="space-y-4">
+        <div className="space-y-3">
           {/* Balance Card */}
           <Card>
-            <CardContent className="p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">USDT Balance</p>
-              <p className="text-4xl font-bold tracking-tight">
+            <CardContent className="p-4">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">USDT Balance</p>
+              <p className="text-3xl font-bold tracking-tight leading-tight">
                 {formatNumber(balances.total)}
-                <span className="text-lg font-medium text-muted-foreground ml-2">USDT</span>
+                <span className="text-sm font-medium text-muted-foreground ml-1.5">USDT</span>
               </p>
-              <div className="border-t border-border/50 mt-4 pt-4 flex">
+              <div className="border-t border-border/50 mt-3 pt-3 flex">
                 <div className="flex-1">
-                  <p className="text-xs text-muted-foreground mb-0.5">Available</p>
-                  <p className="text-base font-bold">{formatNumber(balances.available)} <span className="text-xs font-medium text-muted-foreground">USDT</span></p>
+                  <p className="text-[11px] text-muted-foreground mb-0.5">Available</p>
+                  <p className="text-sm font-bold">{formatNumber(balances.available)} <span className="text-[11px] font-medium text-muted-foreground">USDT</span></p>
                 </div>
                 <div className="flex-1">
-                  <p className="text-xs text-muted-foreground mb-0.5">Locked in Ads</p>
-                  <p className="text-base font-bold">{formatNumber(balances.locked)} <span className="text-xs font-medium text-muted-foreground">USDT</span></p>
+                  <p className="text-[11px] text-muted-foreground mb-0.5">Locked in Ads</p>
+                  <p className="text-sm font-bold">{formatNumber(balances.locked)} <span className="text-[11px] font-medium text-muted-foreground">USDT</span></p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-2 gap-3">
-            <Button onClick={() => setActiveTab('deposit')} className="w-full" size="lg">
-              <ArrowDownCircle className="w-5 h-5 mr-2" />
+          <div className="grid grid-cols-2 gap-2.5 px-4">
+            <Button onClick={() => setActiveTab('deposit')} className="w-full" size="default">
+              <ArrowDownCircle className="w-4 h-4 mr-1.5" />
               Deposit
             </Button>
-            <Button onClick={() => setActiveTab('withdraw')} variant="outline" className="w-full" size="lg">
-              <ArrowUpCircle className="w-5 h-5 mr-2" />
+            <Button onClick={() => setActiveTab('withdraw')} variant="outline" className="w-full" size="default">
+              <ArrowUpCircle className="w-4 h-4 mr-1.5" />
               Withdraw
             </Button>
           </div>
@@ -492,7 +492,7 @@ export function WalletPage() {
 
       {/* Deposit Tab */}
       {activeTab === 'deposit' && (
-        <div className="space-y-4">
+        <div className="space-y-3">
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2">

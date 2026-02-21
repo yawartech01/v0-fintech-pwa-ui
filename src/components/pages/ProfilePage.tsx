@@ -192,7 +192,7 @@ export function ProfilePage({ onAuthChange }: ProfilePageProps) {
   const formattedUID = uid ? `VLX-${String(uid).padStart(6, '0')}` : ''
 
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
 
       {/* Profile Card */}
       <Card className="overflow-hidden">
@@ -200,8 +200,8 @@ export function ProfilePage({ onAuthChange }: ProfilePageProps) {
           {/* Top gradient accent */}
           <div className="h-1 bg-gradient-to-r from-primary/60 via-primary to-primary/60" />
           
-          <div className="px-5 pt-5 pb-5">
-            <div className="flex items-center gap-4">
+          <div className="px-4 pt-4 pb-4">
+            <div className="flex items-center gap-3.5">
 
               {/* Avatar -- tap to change */}
               <div className="relative shrink-0">
@@ -334,13 +334,13 @@ export function ProfilePage({ onAuthChange }: ProfilePageProps) {
           {isAdmin && (
             <button
               onClick={() => navigate('/admin')}
-              className="flex items-center justify-between w-full px-5 py-4 hover:bg-secondary/40 active:bg-secondary/60 transition-colors border-b border-border/50"
+              className="flex items-center justify-between w-full px-4 py-3.5 hover:bg-secondary/40 active:bg-secondary/60 transition-colors border-b border-border/50"
             >
-              <div className="flex items-center gap-3.5">
-                <div className="w-9 h-9 rounded-lg bg-warning/10 flex items-center justify-center">
-                  <Settings className="w-[18px] h-[18px] text-warning" />
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-warning/10 flex items-center justify-center">
+                  <Settings className="w-4 h-4 text-warning" />
                 </div>
-                <span className="text-[15px] font-medium text-warning">Admin Panel</span>
+                <span className="text-sm font-medium text-warning">Admin Panel</span>
               </div>
               <ChevronRight className="w-5 h-5 text-muted-foreground/60" />
             </button>
@@ -353,15 +353,15 @@ export function ProfilePage({ onAuthChange }: ProfilePageProps) {
               <button
                 key={item.path}
                 onClick={() => navigate(item.path)}
-                className={`flex items-center justify-between w-full px-5 py-4 hover:bg-secondary/40 active:bg-secondary/60 transition-colors ${
+                className={`flex items-center justify-between w-full px-4 py-3.5 hover:bg-secondary/40 active:bg-secondary/60 transition-colors ${
                   !isLast ? 'border-b border-border/50' : ''
                 }`}
               >
-                <div className="flex items-center gap-3.5">
-                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Icon className="w-[18px] h-[18px] text-primary" />
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Icon className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-[15px] font-medium">{item.label}</span>
+                  <span className="text-sm font-medium">{item.label}</span>
                 </div>
                 <ChevronRight className="w-5 h-5 text-muted-foreground/60" />
               </button>
@@ -371,10 +371,12 @@ export function ProfilePage({ onAuthChange }: ProfilePageProps) {
       </Card>
 
       {/* Logout */}
-      <Button onClick={handleLogout} variant="destructive" className="w-full" size="lg">
-        <LogOut className="w-5 h-5 mr-2" />
-        Logout
-      </Button>
+      <div className="px-4">
+        <Button onClick={handleLogout} variant="destructive" className="w-full" size="lg">
+          <LogOut className="w-5 h-5 mr-2" />
+          Logout
+        </Button>
+      </div>
     </div>
   )
 }

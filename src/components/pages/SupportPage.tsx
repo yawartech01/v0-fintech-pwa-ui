@@ -58,7 +58,7 @@ export function SupportPage() {
   }
 
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
       {/* Contact Information */}
       <Card>
         <CardHeader>
@@ -69,10 +69,10 @@ export function SupportPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Email */}
-          <div className="p-4 bg-secondary/40 rounded-lg border border-border/40">
-            <div className="flex items-center gap-2.5 text-muted-foreground mb-3">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Mail className="w-4 h-4 text-primary" />
+          <div className="p-3.5 bg-secondary/40 rounded-lg border border-border/40">
+            <div className="flex items-center gap-2.5 text-muted-foreground mb-2">
+              <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Mail className="w-3.5 h-3.5 text-primary" />
               </div>
               <p className="text-sm font-semibold text-foreground">Email Support</p>
             </div>
@@ -89,10 +89,10 @@ export function SupportPage() {
           </div>
 
           {/* Telegram */}
-          <div className="p-4 bg-secondary/40 rounded-lg border border-border/40">
-            <div className="flex items-center gap-2.5 text-muted-foreground mb-3">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Send className="w-4 h-4 text-primary" />
+          <div className="p-3.5 bg-secondary/40 rounded-lg border border-border/40">
+            <div className="flex items-center gap-2.5 text-muted-foreground mb-2">
+              <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Send className="w-3.5 h-3.5 text-primary" />
               </div>
               <p className="text-sm font-semibold text-foreground">Telegram Support</p>
             </div>

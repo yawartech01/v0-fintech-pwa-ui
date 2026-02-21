@@ -215,7 +215,7 @@ export function AppShell() {
 
       {/* Scrollable Content */}
       <main className="flex-1 overflow-y-auto overflow-x-hidden">
-        <div className="px-4 py-4">
+        <div className="py-3">
           <Outlet />
         </div>
       </main>
@@ -223,7 +223,7 @@ export function AppShell() {
       {/* Fixed Bottom Navigation - Only show on main tabs */}
       {isMainTab && (
         <nav className="flex-shrink-0 border-t border-border/50 bg-card safe-bottom">
-          <div className="flex items-center justify-around h-[4.5rem]">
+          <div className="flex items-center justify-around h-16">
             {tabs.map((tab) => {
               const Icon = tab.icon
               const isActive = location.pathname === tab.path

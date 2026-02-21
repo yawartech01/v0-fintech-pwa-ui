@@ -70,30 +70,30 @@ export function TeamPage() {
   const uplineRewards = rewards.filter((r) => r.level === 'upline')
 
   return (
-    <div className="space-y-4 pb-4">
+    <div className="space-y-3 pb-4">
       {/* Header */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Users className="w-5 h-5 text-primary" />
+          <CardTitle className="flex items-center gap-2 text-sm">
+            <Users className="w-4 h-4 text-primary" />
             My Team
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-3 gap-3">
-            <div className="text-center p-3 bg-secondary/30 rounded-lg">
-              <p className="text-2xl font-bold text-primary">{directMembers.length}</p>
-              <p className="text-xs text-muted-foreground mt-1">Direct (L1)</p>
+          <div className="grid grid-cols-3 gap-2.5">
+            <div className="text-center p-2.5 bg-secondary/30 rounded-lg">
+              <p className="text-xl font-bold text-primary">{directMembers.length}</p>
+              <p className="text-[11px] text-muted-foreground mt-0.5">Direct (L1)</p>
             </div>
-            <div className="text-center p-3 bg-secondary/20 rounded-lg">
-              <p className="text-2xl font-bold text-primary">{indirectMembers.length}</p>
-              <p className="text-xs text-muted-foreground mt-1">Indirect (L2)</p>
+            <div className="text-center p-2.5 bg-secondary/20 rounded-lg">
+              <p className="text-xl font-bold text-primary">{indirectMembers.length}</p>
+              <p className="text-[11px] text-muted-foreground mt-0.5">Indirect (L2)</p>
             </div>
-            <div className="text-center p-3 bg-secondary/30 rounded-lg">
-              <p className="text-2xl font-bold text-primary">
+            <div className="text-center p-2.5 bg-secondary/30 rounded-lg">
+              <p className="text-xl font-bold text-primary">
                 {directMembers.length + indirectMembers.length}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">Total</p>
+              <p className="text-[11px] text-muted-foreground mt-0.5">Total</p>
             </div>
           </div>
         </CardContent>
